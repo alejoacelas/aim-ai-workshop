@@ -74,8 +74,9 @@ A curated list of ways to connect Claude Code (and Claude Desktop) to the tools 
 |--------|------|------|-------|
 | **Zapier MCP for Expensify** | MCP (via Zapier) | [Zapier](https://zapier.com/mcp/expensify) | Zapier account; create expense reports, export to PDF. Uses 2 Zapier tasks per MCP call. |
 | **viaSocket MCP for Expensify** | MCP (via viaSocket) | [viaSocket](https://viasocket.com/mcp/expensify) | viaSocket account; handles auth, API limits, and security. |
+| **Expensify Integration Server API** | REST API | [Docs](https://integrations.expensify.com/) / [Postman Collection](https://documenter.getpostman.com/view/28050470/2sA35D74CW) / [GitHub](https://github.com/Expensify/Integrations) | Generate `partnerUserID` + `partnerUserSecret` at expensify.com/tools/integrations. All POST to single endpoint. Export reports (CSV/JSON/PDF), manage policy members. Could wrap in custom MCP. |
 
-*No dedicated standalone Expensify MCP server exists yet. Zapier or viaSocket are the best routes.*
+*No dedicated standalone Expensify MCP server exists yet. Zapier/viaSocket or the direct REST API are the best routes.*
 
 ---
 
@@ -85,8 +86,8 @@ A curated list of ways to connect Claude Code (and Claude Desktop) to the tools 
 
 | Option | Type | Link | Setup |
 |--------|------|------|-------|
+| **Deel REST API (v2)** | REST API | [Developer Portal](https://developer.deel.com/) / [Help Guide](https://help.letsdeel.com/hc/en-gb/articles/8801712601233-How-To-Use-Deel-API) | RESTful JSON API. Manage contracts, candidates, adjustments, documents, payroll. Requires Org Admin or IT Developer Admin role. Supports personal tokens and non-expiring org tokens. Sandbox environment available for testing. |
 | **Zapier (Deel actions)** | Automation | [Zapier](https://zapier.com) | Connect Deel via Zapier's pre-built integrations; accessible via Zapier MCP. |
-| **Custom MCP server** | DIY | [Deel API Docs](https://developer.deel.com/) / [MCP SDK](https://github.com/modelcontextprotocol/servers) | Build a custom MCP server wrapping Deel's REST API. |
 
 ---
 
@@ -139,6 +140,22 @@ A curated list of ways to connect Claude Code (and Claude Desktop) to the tools 
 | **Every.org Charity API** | REST API (free) | [Every.org API](https://www.every.org/charity-api) / [Docs](https://docs.every.org/docs/intro) | Free for non-commercial use. Search 1M+ nonprofits, create fundraisers, donation webhooks. Could wrap in custom MCP. |
 | **Benevity Nonprofit MCP** | MCP (related) | [Benevity Docs](https://causeshelp.benevity.org/hc/en-us/articles/43364091494164-Benevity-nonprofit-MCP-server) | Discover and donate to nonprofits via Claude. Different platform but similar use case. |
 | **briancasteel/charity-mcp-server** | MCP (open-source) | [GitHub](https://github.com/briancasteel/charity-mcp-server) | Look up charity info, verify tax-deductible status, search nonprofits. |
+
+---
+
+## Jitasa (Outsourced Bookkeeping)
+
+*No API or MCP. Jitasa is a service provider, not a software platform.* They integrate with clients' existing tools (QuickBooks, BILL). Best approached via those tools' APIs/MCPs instead.
+
+- [Jitasa website](https://www.jitasagroup.com/)
+
+---
+
+## Impact Ops (Outsourced Bookkeeping)
+
+*No API or MCP. Impact Ops is an operations services provider for high-impact organizations.* Like Jitasa, they work within clients' existing accounting systems rather than offering their own API.
+
+- [Impact Ops website](https://impact-ops.org/)
 
 ---
 
