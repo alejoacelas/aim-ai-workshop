@@ -1,0 +1,1248 @@
+[
+  {
+    "report": "coding",
+    "transcript_id": "work_0974",
+    "quote": "the AI adds value for me because I don't know how to code well.  I made minor efforts to try to learn over the years, but was always stopped along the way.",
+    "start": 8861,
+    "end": 9016
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0658",
+    "quote": "I don't need to know code, so I'm not particularly worried about that. I also feel that as a business analyst, one of my core skills is elicitation and communication skills - something that AI is not able to do at the moment",
+    "start": 5228,
+    "end": 5452
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "I have about three decades of mental scar tissue to remove as far as tech is concerned, I've always considered myself a 'humanities guy' and ignorantly swanned off",
+    "start": 7252,
+    "end": 7415
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0108",
+    "quote": "I recently used AI to write a little app that makes massive formatting changes to different documents and then leverages an open source python module to convert the doc to a different file type. I was able to get the app up and running in about an hour. The app takes about 1 minute to run. I think it probably would have taken me 6+ hours to make the changes to these docs myself.",
+    "start": 4292,
+    "end": 4673
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "I recently was able to use AI to help me write a groovy script to accomplish a task that was costing folks in my department many hours a week and had it teach me groovy along the way.",
+    "start": 6213,
+    "end": 6396
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0708",
+    "quote": "It's almost like how if you plop someone down in Italy for a long time, eventually they'll pick up on the language. While I don't know how to write a lot of code from scratch, I can read it and edit it myself once it's written. Does that make sense?",
+    "start": 8351,
+    "end": 8600
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "what I love about AI is it bridges that gap that has built up over the years, it's reactivated dormant skills I thought had sadly consigned to the past, and I feel quite immersed in the future rather than left behind by it.",
+    "start": 8152,
+    "end": 8375
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "I think that there are certain things that won't be required and I am ok with that. Just like I drive a car but have no idea how it works.",
+    "start": 7182,
+    "end": 7320
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "It sometimes is time consuming to find the right one for the job and remember how to interact with each for the best outcome. It's kind of like I am a manager and I have a team of reports-to that are all the AIs.",
+    "start": 9298,
+    "end": 9510
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0974",
+    "quote": "It was amazing.  All in all, it probably took about 30 minutes of effort, and the output was easily over 100 lines of code.  When I told my boss (the Design Technology Director) about it, she was impressed, and that felt awesome too.",
+    "start": 6762,
+    "end": 6995
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "vibe coding has also lead to some of my biggest frustration where the solutions AI offers are overly elaborate and I have to guide it back to something reasonable. This recently happened on a PowerShell script I needed help on where it told me the outcome was not possible so I went on my own for awhile and brought my idea and current state of work back to the AI where it acknowledged the pathway as viable and helped me finish it.",
+    "start": 6415,
+    "end": 6848
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0019",
+    "quote": "My non-technical coworkers used a particularly famous AI to adjust their plain HTML webpage code to remove a paragraph from a column (inner div) and have the paragraph formatted outside the column as a stand alone portion of the webpage. The 2 coworkers spent a lot of time with that AI trying to fix this issue but it could not get it done despite the code being fed to the AI to edit it.",
+    "start": 6985,
+    "end": 7374
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "Right now, AI isn't truly integrated into anything I do. I stop my work, open the web app, and then type in what I need, upload, etc. I would love to learn how to make agents or something that is more integrated.",
+    "start": 10411,
+    "end": 10623
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "I am a solo-preneur, and small business owner who is also doing all of my own consulting, so I am very cautious with my time. And I have not yet found a way to enhance my skills in a way that I am willing to commit to.",
+    "start": 10742,
+    "end": 10960
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "I find that both limit my uploads, so I struggle with the volume of documents. That is why I have started to use Notebook LLM. Although, I don't like notebook LLMs output the best, it allows the most volume.",
+    "start": 6609,
+    "end": 6816
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "even understanding the terrain is a bit intimidating, let alone what I need to do within it.",
+    "start": 7560,
+    "end": 7652
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "I recently was able to use AI to help me write a groovy script to accomplish a task that was costing folks in my department many hours a week and had it teach me groovy along the way. On the flip side, vibe coding has also lead to some of my biggest frustration",
+    "start": 6213,
+    "end": 6474
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "I would never have been able to create the groovy script saving my coworkers 10-14 hours every week without it.",
+    "start": 7391,
+    "end": 7502
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0974",
+    "quote": "This has added value because I know the kinds of tools I want to create and use, and I have the ability to describe these tools using natural language.  I think you can tell from these conversations that I have the ability to write well, and that I value comprehensiveness.  My ability to naturally describe the things I want in detail make up for the shortfall in my technical ability to create these solutions myself.",
+    "start": 9018,
+    "end": 9437
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0108",
+    "quote": "I recently used AI to write a little app that makes massive formatting changes to different documents and then leverages an open source python module to convert the doc to a different file type. I was able to get the app up and running in about an hour.",
+    "start": 4292,
+    "end": 4545
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "Long story short, got an intervew within the hour for a role that we can charge three times as much for, in a role we don't really fully grasp yet, and I'm awaiting the results of the final interview right now!",
+    "start": 6592,
+    "end": 6802
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0450",
+    "quote": "It is the kind of proposal that, in the past, would have taken me several days to a week to prepare given the complexity of the matter an the client's specfiic requirements.  However, because I had some extensive rough notes, I was able to upload my notes directly from [REDACTED] into Copilot's Researcher agent and generate a proposal to the client that was around 80% complete in 10 minutes.",
+    "start": 6628,
+    "end": 7022
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0376",
+    "quote": "Ultimately, we were able to save tens of thousands of dollars with this method, and purchased equipment that many of our users were very happy with!",
+    "start": 9395,
+    "end": 9543
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "My mental model of claude code is that it is an eager but very junior developer, and our conversations are like pair programming, with me calling the shots, reviewing and approving each step.",
+    "start": 5625,
+    "end": 5816
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "I use the term 'vibe code' derisively; to me it means a naive layman letting the machine do all the work.",
+    "start": 8192,
+    "end": 8257
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "what I love about AI is it bridges that gap that has built up over the years",
+    "start": 8152,
+    "end": 8228
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0365",
+    "quote": "I would prefer to code everything myself. If I let Ai do everything then I won't know the details of the system and I wont be able to fix bugs.",
+    "start": 2643,
+    "end": 2786
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0365",
+    "quote": "I'm ok with ai writing 100% of the code as long as I know how it works",
+    "start": 6899,
+    "end": 6969
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0108",
+    "quote": "I'm not a developer so it usually looks like me requesting the AI create an app. Once the AI has given me the code, I will run it. At this point I usually encounter errors.",
+    "start": 3034,
+    "end": 3206
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0227",
+    "quote": "I worry about AI taking over quite a lot, but its aptitude for certain areas does make me feel like not being good at those areas maybe doesn't matter too much.",
+    "start": 6964,
+    "end": 7124
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "Well, I think its eventually leading to a shrinking of my industry and unemployment for me.",
+    "start": 9035,
+    "end": 9126
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0831",
+    "quote": "I feel that I need to develop skills in this area or I will get left behind, especially over the course of a career.",
+    "start": 5958,
+    "end": 6074
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0831",
+    "quote": "I am less concerned about AI fully taking over because I think you need a human to deal with other humans, especially in my role. However, I am concerned about humans with better AI skills out competing me.",
+    "start": 6228,
+    "end": 6434
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "usually issues of style. i am surprised by how few errors claude code makes, especially compared to generating code from prompts on the web browser.",
+    "start": 3265,
+    "end": 3413
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0974",
+    "quote": "I paste the code output into the script.py file VSCode, which is located in the folder hosting a toolbar, panels, and pushbuttons of test scripts.  I run the script, and it rarely ever nails it on the first try.",
+    "start": 5828,
+    "end": 6039
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "I have about three decades of mental scar tissue to remove as far as tech is concerned, I've always considered myself a 'humanities guy' and ignorantly swanned off, now I'm looking for easily remedied angles where I fall short",
+    "start": 7252,
+    "end": 7478
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0212",
+    "quote": "Look, I'm old. I have worked using a keyboard for 44 years. I enjoy writing, and I enjoy researching new things.",
+    "start": 9374,
+    "end": 9486
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0108",
+    "quote": "I still want to be able to think and create. I appreciate what AI can do for my productivity at work, but being able to just do human things is important to me.",
+    "start": 5344,
+    "end": 5504
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0708",
+    "quote": "Coding is hit or miss, but to be honest, that could be because of my lack of coding knowledge. As someone who has very little, it's still much better than I am.",
+    "start": 6950,
+    "end": 7110
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0658",
+    "quote": "I don't know how to code, or to use PowerQuery, so when I asked the AI to create code for me to simply do what I wanted it to do, I found it very effective.",
+    "start": 4663,
+    "end": 4819
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "It is hard to take python or groovy classes that teach everything but without application it doesn't stick.",
+    "start": 6105,
+    "end": 6212
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0974",
+    "quote": "My ability to naturally describe the things I want in detail make up for the shortfall in my technical ability to create these solutions myself.",
+    "start": 9293,
+    "end": 9437
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0365",
+    "quote": "I started vibe coding and it was going really fast and I was loving it. I was letting ai do most of the work (lesson learned) and after like a week, I basically couldnt work on the project anymore because I had no idea how anything worked.",
+    "start": 5684,
+    "end": 5923
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "god dammit, i vibe coded this thing and it's broken and i'm not sure how to fix it",
+    "start": 7482,
+    "end": 7564
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0658",
+    "quote": "if I don't know how to code, or to use PowerQuery, so when I asked the AI to create code for me to simply do what I wanted it to do, I found it very effective. Minor finetuning was required, but it ended up saving me a lot of time",
+    "start": 4670,
+    "end": 4890
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "it's reactivated dormant skills I thought had sadly consigned to the past, and I feel quite immersed in the future rather than left behind by it",
+    "start": 8230,
+    "end": 8374
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0594",
+    "quote": "I prefer to show, not tell, he is certainly curious about how I am managing to suddenly do the job of three admins at the drop of a hat!",
+    "start": 4950,
+    "end": 5086
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "I can only think of one example where I was really impressed and just couldn't believe how well it worked.",
+    "start": 8950,
+    "end": 9056
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "I have many of being frustrated, unfortunately, as that is most of my interactions.",
+    "start": 8866,
+    "end": 8949
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0173",
+    "quote": "I rarely assign it tasks due to trust issues.",
+    "start": 4681,
+    "end": 4726
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0708",
+    "quote": "I imagine in 5 to 10 years I'll be a one-man agency with a few competent AI agents that handle tasks for me.",
+    "start": 9416,
+    "end": 9524
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0096",
+    "quote": "If/when the AI companies develop more 'integrate-able' solutions, for laypeople like me, I will adopt them. I look forward to that day",
+    "start": 11479,
+    "end": 11553
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0212",
+    "quote": "I think more energy should be spent (although I don't know that it isn't already done so in traditional work settings?) on training people to use AI as an assistive tool, rather than always doomsaying that is taking away jobs.",
+    "start": 12209,
+    "end": 12435
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0108",
+    "quote": "One coworker doesn't even seem to think for himself anymore, as he relies on AI for everything. This has actually made me want to use AI only when necessary, interestingly enough.",
+    "start": 3701,
+    "end": 3880
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0243",
+    "quote": "I deeply regret admitting that I used certain tools in certain circumstances, as I felt some people in the organization used it against me behind closed doors.",
+    "start": 13886,
+    "end": 14045
+  },
+  {
+    "report": "coding",
+    "transcript_id": "work_0221",
+    "quote": "I suspect using Claude code is against company policy, but it is so effective that i super don't care.",
+    "start": 2930,
+    "end": 3032
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0245",
+    "quote": "I use AI basically daily. I am an Early Years Educator, and I take observations daily of the children's learning. These observations must be written with the activity the child has undertaken, what skills they have learned from it, and any next steps for learning or any ideas for extending the learning. There's a pretty specific format. I have fed an AI examples of my own personal observations as an example template, and the AI now uses this template to write my observations for me with me giving it my bullet point notes on what happened. It saves me SO MUCH TIME. Before it took me 30 minutes to complete one, now it's not even 5.",
+    "start": 1108,
+    "end": 1745
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0450",
+    "quote": "I recently had to prepare a detailed proposal for a client that was considering retaining our firm in a complicated regulatory matter.  It is the kind of proposal that, in the past, would have taken me several days to a week to prepare given the complexity of the matter an the client's specfiic requirements.  However, because I had some extensive rough notes, I was able to upload my notes directly from [REDACTED] into Copilot's Researcher agent and generate a proposal to the client that was around 80% complete in 10 minutes.",
+    "start": 6492,
+    "end": 7022
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0577",
+    "quote": "The use of AI to quickly draft update emails to clients about quite minor details has been most satisfying - when I take about 5-10 minutes to draft an email, and there is 7-8 of them a day, the time savings are significant.",
+    "start": 5941,
+    "end": 6165
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0657",
+    "quote": "I have a tendency to avoid being direct with people when I'm afraid of hurting their feelings or sounding too harsh. AI is really good at helping me strike a balance between being upfront and clear, without being avoidant or harsh.",
+    "start": 1834,
+    "end": 2065
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0838",
+    "quote": "Well it would have involved reading 10k/10q reports and other company filings, looking at historical financial data, reading the news etc to learn about companies, now I get a list that is worth looking into further, with much of the data and info I need presented for them already via the agent report. I guess the report from the agent saves me probably 3-7 hours a week.",
+    "start": 7156,
+    "end": 7529
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0904",
+    "quote": "When it comes to doing product research I used to spend hours even days trying to see what products were selling and what other sellers where doing better. This was cut short by more than half the time using everbee",
+    "start": 5556,
+    "end": 5771
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0886",
+    "quote": "Saving time generating templates for bulk email dissemination is very satisfying, saving a significant amount of time.",
+    "start": 7083,
+    "end": 7201
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0352",
+    "quote": "I feel particularly satisfied really anytime that I'm creating Excel spreadsheets. The data is usually transferred really well so that it doesn't take much formatting if any to get to the final product.",
+    "start": 4799,
+    "end": 5001
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0178",
+    "quote": "The only other way of learning this is through courses or Youtube videos, which is time intensive and you're dealing with ads or a cost and you cant ask questions - with AI you get an answer immediately, specifically tailored to your data or task.",
+    "start": 2500,
+    "end": 2737
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0745",
+    "quote": "It felt like when they download skills in The Matrix.",
+    "start": 9570,
+    "end": 9623
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0108",
+    "quote": "I recently used AI to write a little app that makes massive formatting changes to different documents and then leverages an open source python module to convert the doc to a different file type. I was able to get the app up and running in about an hour. The app takes about 1 minute to run. I think it probably would have taken me 6+ hours to make the changes to these docs myself.",
+    "start": 4292,
+    "end": 4673
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0478",
+    "quote": "We wear microphones and describe each step of what we are doing, and the AI helps measure time duration and repetitions. It then writes them in our notes in an easy way to read and review",
+    "start": 1485,
+    "end": 1672
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0478",
+    "quote": "it's still much faster. Typically a session is 40 minutes, and it can be difficult to remember every step that was taken and how long each repetition lasts. Notes would take upwards of 40 minutes to complete after a session. With using AI, even with reviewing and changing some details that were misinterpreted, notes now take about 5-10 minutes.",
+    "start": 3641,
+    "end": 3987
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0692",
+    "quote": "They are mundane and boring tasks that I prefer to delegate to LLMs to save time and essentially my own effort. These are things that need to be done on a weekly basis and AI could do it in less than 2 minutes whereas sometimes it takes me 20 minutes or more.",
+    "start": 1947,
+    "end": 2206
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0829",
+    "quote": "Basically, the first time I used AI to help with writing an article. Some of my clients forbid using AI. In that scenario, a 1,000 word article can take between 1.5-2.5 hours to write. The first time I used AI for one of my clients, I believe the article was around 1,200 words. I remember being highly satisfied because, even though I was still learning how to use AI, the entire process took less than an hour for me to obtain an article from the AI, edit it, and submit it.",
+    "start": 5396,
+    "end": 5872
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "I think what usually takes anywhere from 10 to 20 hours could be dropped to 4 or 5 with this.",
+    "start": 3129,
+    "end": 3222
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0069",
+    "quote": "I needed analogies for them. I asked for analogies and asked ChatGPT for an explanation suitable to an 8 year old (the cx was in their 40s). I needed to detach my own ego from the situation (why wasn't MY words working) and just offer something different and the use of this tool helped me remain calm in the moment.",
+    "start": 4194,
+    "end": 4510
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0657",
+    "quote": "I work remotely quite a bit (post-COVID), connecting with my team throughout the day, but have really missed the in-office opportunities for collaboration. AI has provided another way for me to collaborate when missing the in-person brainstorming.",
+    "start": 3842,
+    "end": 4089
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0904",
+    "quote": "Before creating my own business I used to work at an office with many employees... I worked there for four years and was left with that habit. Now that I am on my own I use AI to imitate the way I would solve things in the office.",
+    "start": 3927,
+    "end": 4630
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0745",
+    "quote": "I think I'm lucky in that I have a theory that AI will usher in an age for people with brains like mine. ADHD, broadly skilled under achievers, who have potential but can't quite apply it. I think AI is most effectively used by holistic thinkers. It super charges ADHD hyperfocus because you suddenly have an expert to talk to about any new thing you pick up.",
+    "start": 9930,
+    "end": 10289
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0069",
+    "quote": "I now keep my use of the tools quiet as I'm sure it would be frowned upon. But the tools I do have are not up to scratch, so I am just trying to meet the pressures of the job with some problem solving, its not my fault their systems are so outdated, I shouldn't suffer and neither should cxs",
+    "start": 9547,
+    "end": 9838
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0245",
+    "quote": "I've also had praise on the quality of my written work, I suppose I'd feel a little silly if they realised that it was actually an AI that wrote it for me!",
+    "start": 5893,
+    "end": 6048
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0450",
+    "quote": "The standard billing method for decades for Canadian law firms has been the billable hour.  The rise of AI is threatening the billable hour like never before since a task that used to take 10 hours, for example, may now be complete in 2 hours, with a corresponding reduction in billable hours.  Therefore, we are having discussions in the firm about whether it makes sense to bill some items on a fixed fee basis that reflects the value we provide to the client.",
+    "start": 7798,
+    "end": 8260
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "And when you have 30 children to write about, this is incredibly time saving.",
+    "start": 1583,
+    "end": 1660
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0478",
+    "quote": "The more time I have to help clients and not do the paperwork, the better for everyone",
+    "start": 8387,
+    "end": 8473
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0069",
+    "quote": "The emails, when I realised how much time I was saving, vs what I had been doing before. I can skip a lengthy (and I really do mean lengthy) process and go straight to the email address and copy paste in the Output.",
+    "start": 10267,
+    "end": 10482
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0178",
+    "quote": "It's now more of norm in daily use so I don't get the 'satisfied' feeling I used to when I learned how much time I could save. But frustrations are a daily occurrence. It still has a long way to go, it can't analyse large datasets on excel, it often can't complete what seem to be the simplest tasks. I don't quite trust it, I have to always ask for sources, and open another chat to make the same request for data to check its answers. Still, I find maybe 60% of the time there is an issue - 100% if we're reflecting back over all of the conversations each day.",
+    "start": 5578,
+    "end": 6140
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0416",
+    "quote": "Yes, sometimes it doesn't correctly call back to certain cells, rows, columns so I always have do double check. I'd say 50% of the time its right & there's no need for me to go back & forth to correct the mistakes.",
+    "start": 3311,
+    "end": 3525
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0778",
+    "quote": "I can share a time where it made me frustrated. I was writing a research paper and I needed some citations, so I asked the model to give me some research journals I could look up and read. It gave me a list, but then I couldnt find like 90% of them because they were fabricated. So it bothered me that the model made up the references instead of guiding me to real research that exists.",
+    "start": 4316,
+    "end": 4702
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0081",
+    "quote": "I started with a base of knowledge, indicated to the AI to summarise it and how - but then still needed to spend time making sure it was correct, and adapting it to my voice...and I felt like I had wasted time and could have just done it from the get go.",
+    "start": 1490,
+    "end": 1744
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0392",
+    "quote": "I also learned to start new conversations every so often to avoid running up too many interactions in the one chat? Sometimes if you talk in one chat for too long the quality seems to disintegrate.",
+    "start": 7299,
+    "end": 7496
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0081",
+    "quote": "When you summarise yourself, the information tends to stick more. It's like when you are studying for an exam and revise information and knowledge, and practice. That is completely lost if an AI is doing the revision or summarisation for you - as you are repeating the information from the sources, and skipping a step.",
+    "start": 3611,
+    "end": 3930
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0478",
+    "quote": "When I am developing a new template to use for the structure of a session, it is frustrating to describe to the AI the type of information I want them to listen for and how to transcribe it into the notes. I wish there was an easier way to make these templates so future notes are easier. Right now it is a trial and error approach that can take a lot of time, until the template is achieved. Then it is fast",
+    "start": 7400,
+    "end": 7808
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0392",
+    "quote": "My colleagues are not as positive about AI as I am. They think it's cheating not to write your own work and they won't even use it for simple blogs.",
+    "start": 9515,
+    "end": 9663
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0245",
+    "quote": "A lot of people in this field believe that if you need an AI to do the work for you, then you shouldn't be doing it in the first place.",
+    "start": 5433,
+    "end": 5568
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0173",
+    "quote": "I use AI mainly as a collaboration partner. I will ask it to tell me what I am missing, explain why something may or may not be a good idea, flesh out something I have already established a framework for, or grade my work/progress. I rarely assign it tasks due to trust issues.",
+    "start": 4449,
+    "end": 4726
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "I use it more about being given more diverse ideas I may not have thought about and less about how it should be delivered and big thinking questions and ideas.",
+    "start": 4813,
+    "end": 4962
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "At the end of the day teaching is a human endeavour and the personable element needs to be done by a human.",
+    "start": 4400,
+    "end": 4507
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0882",
+    "quote": "The first thing I can think of is writing emails. I can see the appeal in certain contexts where its really not worth the time and effort... but I'm not a massive fan of the idea that its just bots talking to bots all the time",
+    "start": 4102,
+    "end": 4328
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0178",
+    "quote": "Writing. AI can write but it isn't quite there yet. Reading AI content lacks the nuance of human written words. I can pick it out AI generated text very easily, and automatically I feel that it has less value - its a shortcut. It lacks that intentionality you mentioned above - like a factory pumping out cheap goods - no one wants this.",
+    "start": 3391,
+    "end": 3728
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0450",
+    "quote": "I am not so much worried about 'maintaining my skills' as a lawyer.  However, the time savings are having an impact on the economics of running a law firm, particularly a small firm.",
+    "start": 7614,
+    "end": 7796
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0082",
+    "quote": "I don't think AI can fully take over my profession and others like it; I think it eliminates the low performers and empowers the high performers.",
+    "start": 5408,
+    "end": 5553
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0657",
+    "quote": "I felt super satisfied recently when I was doing some thematic analysis with a group of interviews. There was so much content and I was getting really overwhelmed. This is usually when I would sit down with a teammate and start mind mapping together. I fed some of the quotes I had collected from the interviews and asked the AI to help me develop some themes and subthemes and start grouping the quotes. Once we had the skeleton, I used the AI as a sounding board to refine and work through the material until I had a pretty substantial framework. It really cut my worktime in half and made me feel less alone in the process.",
+    "start": 4454,
+    "end": 5080
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "I think it's a great resource but my worry is it will cause teaching to merely be about content delivery and we will take the humanity, artistry and creativity out of teaching. We already have a generation of ipad kids and do we really want that to be our future of learning? I'm not keen to see a Wall-E-esque future of learning for our children.",
+    "start": 10042,
+    "end": 10389
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0038",
+    "quote": "AI is becoming a large part of the teacher toolkit due to its ability to take time consuming thought processes and break them down into simple ideas. Most teachers are beginning to come on boars due to work load pressures and finding different ways to enhance their knowledge of topics before teaching them.",
+    "start": 6582,
+    "end": 6889
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0069",
+    "quote": "I know it coming for my job, and I'm not overly bothered. The telecomms industry cycles through needing UK agents and then offshoring the work when their profits suffer too much. But then profits start suffering because cxs want UK based agents. AI agents will just be another step in this cycle.",
+    "start": 11299,
+    "end": 11595
+  },
+  {
+    "report": "time",
+    "transcript_id": "work_0178",
+    "quote": "I will always value human skills more - I think that even though AI can pump out tasks - we still pay more for handcrafted items, they are still viewed with more value than a machine made item - so holding onto my skills is more about maintaining that value and developing.",
+    "start": 6716,
+    "end": 6989
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0894",
+    "quote": "things that very detail oriented, or moving a lot of data around, or are numbers-heavy, are tasks i just do myself, though i would love to have ai do it for me. perhaps it's just i don't have the knowledge to interact with the ai appropriately. I don't know what it's capable of, so i just do it myself to avoid creating more work for myself. the tasks that i can quickly tell whether or not there's an issue (copy writing, emails, simple taks), are the ones i lean on ai more.",
+    "start": 6333,
+    "end": 6810
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0022",
+    "quote": "I prefer to use AI to get a general idea and if things aren't as important.  If serious issues come up, I may still use AI to get some data analysis but I will also be double checking the information myself to ensure nothing is missed.",
+    "start": 3542,
+    "end": 3777
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "I do prefer the handle my bookkeeping and invoicing tasks by myself.  As an accountant, I am a stickler for accuracy in my accounts and so I have not yet developed enough trust in AI to let it take over that that task.  I would prefer to verify accuracy of the balances due and not have to deal with sending out an incorrect billing as that does not go over well with the customer.",
+    "start": 2234,
+    "end": 2615
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0514",
+    "quote": "When I read contracts, I sometimes ask for summaries but still prefer to go over them myself out of fear of AI hallucination when it comes to more sensitive material.",
+    "start": 3233,
+    "end": 3399
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0022",
+    "quote": "I also do data entry which directly affects how healthcare professionals get paid, and there can be no mistakes or the claims will be rejected.  I would like to maybe one day use AI for this, but currently it is too vital to entrust to AI as there is too much nuance to the entries.",
+    "start": 3889,
+    "end": 4171
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0514",
+    "quote": "Client and colleague emails sound more authentic when written by humans, especially when recipients are already familiar with your style of writing and tone.",
+    "start": 2220,
+    "end": 2377
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0745",
+    "quote": "When it comes to tasks, I like using AI to replace the parts of my mind I don't feel attached to. Formal writing, for example, where you have to speak robotically anyway, I'm like, go ahead. Calculations, too. Busy work, grunt work, crunching information. That stuff I let AI do. But things like texting family, or writing for fun, I do myself. I suppose it comes down to tasks that involve emotion or passion.",
+    "start": 7066,
+    "end": 7476
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0838",
+    "quote": "Getting to build rapport with clients and potential clients is rewarding and gives a break from deep work stuff so I like to keep a certain level of communication strictly human input only.",
+    "start": 3261,
+    "end": 3450
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0102",
+    "quote": "I would feel quite uncomfortable with using AI to create a lesson plan and schedule. I may ask for example sub-topics or problems, but I absolutely wouldn't use it to create, say, the main take-aways the lesson should have.",
+    "start": 3401,
+    "end": 3624
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0510",
+    "quote": "the part of producing I love is the networking with financiers, negotiating with vendors, and negotiating with / hiring cast and crew...those are all things that need the human touch for sure.",
+    "start": 4196,
+    "end": 4388
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0982",
+    "quote": "I work on tasks together. I have to verify everything I do myself. I am handling payments and money and its critical that I understand what I'm doing. I may have AI do the 'heavy lifting' and I will ask follow up questions and for clarification and more nuances to be added throughout. I never say 'here do this' and then just trust that it is all correct.",
+    "start": 4525,
+    "end": 4881
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0333",
+    "quote": "The tasks I like to leave for myself to do are ones that will be most beneficial for my continued professional development in my current role and I typically do not rely on an AI tool to help me complete those projects unless I get stuck on something or could ask for any useful suggestions from the tool. The types of tasks I like to utilize without the use of AI are more project-management related because this is an area that I could use with more fine-tuning, practice with incorporating it into more of my workflows day-to-day. If I were to utilize AI to take care of all that work for me, I would lose the opportunity to make calculated mistakes and learn from them to ensure they dont repeat themselves in the future.",
+    "start": 2625,
+    "end": 3350
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I read a story recently in the news that doctors lost diagnostic skills after relying on AI to do it for a while.  I need to keep growing my skills.",
+    "start": 8768,
+    "end": 8916
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "I think, in time, I could come to trust AI more as its accuracy and understanding of my systems grows.",
+    "start": 6368,
+    "end": 6470
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0527",
+    "quote": "For me, the tipping point was when the AI models started 'remembering' past conversations. It's very helpful when the model knows what I've tried, what I've dismissed, my voice and my goals. The conversation can be productive from the first prompt in a new conversation.",
+    "start": 10093,
+    "end": 10363
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I try to only use it in ways I can verify on my own, so I don't fall prey to hallucinations.",
+    "start": 1705,
+    "end": 1797
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0255",
+    "quote": "I'm still not 100% convinced of AI's ability to produce factual information consistently, so I use it to bring up sources that I can fact check myself against its claims.",
+    "start": 2441,
+    "end": 2611
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0008",
+    "quote": "My colleagues have sought assistance from different AI models in their daily tasks, which has made me feel more comfortable in doing so.",
+    "start": 3545,
+    "end": 3681
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0255",
+    "quote": "I have another job at a brewery where AI is being incorporated more, so I kind of see the applicatios they're using it for and I guess it makes me feel more comfortable bringing it in at my own business.",
+    "start": 5048,
+    "end": 5251
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0143",
+    "quote": "I was getting it to help me with a specific legal task quite recentyl, and I'd given it all the documents to work with, and it hallucinated a case and I almsot hadn't noticed. it was pretty frustrating because the implciations of that owuld have been huge. even the best models now are still hallucinating cases which really damages trust especially int he legal profession.",
+    "start": 13686,
+    "end": 14060
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0894",
+    "quote": "there have been times when (unfortunately) the ai hallucinated comments--it made them up instead of pulling from the file. when fact checking the comments, they weren't actually in the chat transcript.",
+    "start": 3289,
+    "end": 3490
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "I have had some frustrations with AI when I tried to have it set up a marketing plan and it went completely off course with ideas that did not match what I had requested.",
+    "start": 4412,
+    "end": 4582
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "I asked for a plan that would be suitable for reaching customers with older vehicles, since we are not a dealership and therefore our customers are those who own cars that are no longer under warranty.  AI was determined to focus on new or almost new cars that do not fit our business model.",
+    "start": 4813,
+    "end": 5104
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0514",
+    "quote": "A real estate team was selling a property that was fully described by an AI assistant and there seems to have been no human oversight. When the property went online, people started visiting... But quickly they realized that the great school that was advertised as being in proximity was not even close. It was in a different municipality.",
+    "start": 5672,
+    "end": 6010
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0130",
+    "quote": "I have seen my colleagues misuse AI and suffer consequences, so I learned early that I need to validate output and consider where and how I can best leverage the technology.",
+    "start": 3417,
+    "end": 3590
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0255",
+    "quote": "I like to re-edit the suggestions I receive to ensure they align with my style and tone, and my preference for a localised Kiwi-business-casual style",
+    "start": 3203,
+    "end": 3352
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0527",
+    "quote": "Most often, it's to sound less like a sales pitch. To keep the communication friendly and casual.",
+    "start": 2434,
+    "end": 2531
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0383",
+    "quote": "Sometimes, they models will make me sound TOO kind, which is probably appropriate most of the time, but it doesn't match my voice. It will also reel a joke in sometimes if it's 'on the edge', and I'll evaluate it.",
+    "start": 6015,
+    "end": 6228
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0383",
+    "quote": "I always get frustrated when making dough recipe books. I'll have a big list of recipes in bakers percentages that I want converted to a set size, and I've learned the hard way that I need to double check every recipe provided by the model or just do it myself beforehand.",
+    "start": 12246,
+    "end": 12518
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0408",
+    "quote": "The calculations are sometimes wrong, so having to double check or verify. This ends up taking too much time, I could just do it myself in less time.",
+    "start": 2073,
+    "end": 2222
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I tried asking a model to build a daily course schedule for me for a new semester from one I had built for the previous year--basically just change the dates to the new semester.  But as soon as it did so I felt that I didn't have a feel for the schedule and I was uncomfortable without having gone through the process myself.",
+    "start": 4487,
+    "end": 4813
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I think it was about being reflective and 'closing the loop' as we call it in assessment.  If it had just been purely a matter of shifting dates but otherwise keeping to exactly the same schedule I might no have minded as much.  But I found I wanted to give some lessons more time, some lessons less.  I wanted to add a lab activity, but I needed to figure out how to make room for it.  I just needed my own hands on the wheel, so to speak.",
+    "start": 5459,
+    "end": 5839
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0894",
+    "quote": "now i'm a bit hesitant because it ends up causing more work for us. if the ai is unreliable and i'm having to spend time fact checking, it's counter productive.",
+    "start": 3792,
+    "end": 3952
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0894",
+    "quote": "i don't do too, too much data management, but there have been times i've combine some order exports or membership reports. honestly, i probably haven't implemented more ai assistance because i'm fearful that it will make a mistake and i'll have to just do it myself, so i end up just doing it myself to avoid the risk and wasted time.",
+    "start": 5646,
+    "end": 5980
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0527",
+    "quote": "The financial tasks are cut and dried. They're either right or their wrong. My voice and vision don't matter in those tasks. For the writing tasks, they still reflect me. It's [REDACTED] photography I'm selling, not AI's.",
+    "start": 5279,
+    "end": 5500
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0013",
+    "quote": "For the novel is was an assistant while I did the work. For my direct sales business the more it can do for me the better.",
+    "start": 4458,
+    "end": 4580
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0013",
+    "quote": "I did not want AI writing the book for me. I only wanted it as an assistant. I believe it's a mistake to let AI do entire tasks in the creative arena. It would not have truly been my novel if AI had written it for me.",
+    "start": 3788,
+    "end": 4005
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0255",
+    "quote": "It is something I consider. I've always prided myself on my command of the English language and general communication skills, and this probably informs my refusal to relinquish the editorial oversight I retain.",
+    "start": 6754,
+    "end": 6964
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0302",
+    "quote": "When it comes to anything deeply creative, like developing my story or creating prose, I don't want any sort of collaborator. I don't want ideas from the AI to get into my head. The whole point of writing is to do it myself.",
+    "start": 9239,
+    "end": 9463
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0383",
+    "quote": "Even if I had full trust in the model, I think I would need to keep things collaborative as a creative output. I look cooking, and I like creating dishes. If I was just plugging requests in to a machine and following recipes, I'd probably do something else.",
+    "start": 14574,
+    "end": 14831
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0445",
+    "quote": "I would say its around a 50/50 split. As I use AI quite a lot, and see a lot of emails and copy from businesses, I feel I can now tell very easily and quickly if something has been written by AI. So I always try to tailor my emails at least a little so it doesnt seem its been written by AI without any editing whatsoever, as I feel this just makes you look lazy.",
+    "start": 3336,
+    "end": 3699
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0383",
+    "quote": "When I see that something is clearly just copy pasted from an AI model I get put off. To me, personality shows care and pride. If you aren't putting any effort in to your menus or website, can I trust you to care about the food you put out?",
+    "start": 10523,
+    "end": 10763
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0387",
+    "quote": "I can absolutely tell when other creators incorporate AI into their copy and to be honest I have mixed feelings about it. Without any edits, it seems really lazy.",
+    "start": 4221,
+    "end": 4383
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0102",
+    "quote": "We work with youth, and we recognize that recent studies have shown that AI basically reduces brain connectivity and general critical thinking and creativity. I even feel that a bit myself. In the same way that boredom forces creativity, not having AI forces brainstorming and critical thinking and research.",
+    "start": 6457,
+    "end": 6765
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0579",
+    "quote": "I just feel as though when I am using the ai I am not actively using my brain to find better words or ensure my grammar is the best it can be",
+    "start": 5837,
+    "end": 5978
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0894",
+    "quote": "it does cross my mind occasionally that i should still at least flex those muscles so as not to get too rusty when it comes to tasks i pass off to ai. to stay sharp and to not be tooooo reliant on it.",
+    "start": 11384,
+    "end": 11584
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0387",
+    "quote": "With sales, the personal touch and relationships are PARAMOUNT. AI can never replicate who I am or the way I make people feel heard, understood, and comfortable.",
+    "start": 5287,
+    "end": 5448
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0598",
+    "quote": "I don't think an AI chatbot (as they exist currently) could effectively replace the human interactions that constitute a healthy learning community. I certainly try to sharpen my ability to respond to student work, but I don't think any students would desire a classroom taught by an emotionless chatbot.",
+    "start": 4802,
+    "end": 5106
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0733",
+    "quote": "My clients have come to me because they trust in MY abilities. If they just wanted AI generated content, its plausible they could do that on their own.",
+    "start": 5240,
+    "end": 5391
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0514",
+    "quote": "I do. All the time. As I see AI assistants becoming better and better at writing, ads, strategy, visuals, translation... I realize that from the moment they're able to synthesize everything on their own, they will technically have the ability to replace me. But today by collaborating with AI, I still feel like I'm in the driver seat.",
+    "start": 6927,
+    "end": 7262
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0066",
+    "quote": "My workplace culture has changed a lot over the last two years to go from wary of AI to trying to integrate it more and more. A lot of the initial skepticism has worn off. I feel more comfortable using it now.",
+    "start": 4040,
+    "end": 4249
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0052",
+    "quote": "Before we had openly embraced this I wouldn't say apprehensive but I didn't see the benefits at the time in using AI. Now I view it as a tool to use and collaborate with to make me more productive and a valued asset with the teams I work with",
+    "start": 4128,
+    "end": 4370
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "It would be wonderful if AI could take over more of my tasks, including those that require more skill.  That said, I would still prefer to be involved in overseeing what AI did before giving it the stamp of approval.  I see myself as always proofreading the work that AI does.",
+    "start": 5506,
+    "end": 5782
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0527",
+    "quote": "I think fairly soon, AI will take over the 'math' tasks. It's already integrated in my photo editing programs. Eventually those will need less input from me. I see a future where my editing program can access all my photos, learn my goals, what I like and instantly edit my photos in my style. To me, that's a great use of AI.",
+    "start": 8836,
+    "end": 9102
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I hope it keeps going the way it is, with more productive collaboration.  I do, however, hope that the AI grading helpers that are being developed get truly good at some point.  I'll happily delegate that work (with supervision, always) to an AI if it did a good enough job (presumably being trained on my own grading).",
+    "start": 9156,
+    "end": 9475
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0143",
+    "quote": "I work as a paralegal, and I need to do a lot of discovery tasks, so I like to use AI for that. However, I find that it makes a lot of mistakes, so I treat AI a bit like an intern. I delegate smaller tasks to it, and then i try to supervise the work to make sure its accurate.",
+    "start": 3616,
+    "end": 3892
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0768",
+    "quote": "I don't think there are, really. I'm having trouble thinking of any examples. I generally try to have oversight over any output that anyone else will see. I like to make sure the AI is not going to embarrass me by missing something obvious, for instance.",
+    "start": 5298,
+    "end": 5552
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0615",
+    "quote": "I look forward to having to review behind AI less. When I can trust what it says without having to research behind it, it'll save a lot of time and headache. I need it to never hallucinate and always be truthful, especially when it doesn't know something or it's confused.",
+    "start": 6682,
+    "end": 6954
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0132",
+    "quote": "Ideally, I see AI as taking over more of my tasks as it continues to evolve in its capacity.  That said, I still see myself overseeing accuracy and quality.",
+    "start": 6097,
+    "end": 6253
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0514",
+    "quote": "My hope is that despite AI's increasing skills, human input will always be necessary and therefore, people with the knowledge and skills to collaborate efficiently with AI will continue to hold positions without being replaced.",
+    "start": 8078,
+    "end": 8305
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0255",
+    "quote": "I don't think I'll ever give up the human element for communications",
+    "start": 7501,
+    "end": 7569
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0598",
+    "quote": "Continue to use it for task delegation. I can't imagine using it to think critically for me.",
+    "start": 5385,
+    "end": 5477
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0102",
+    "quote": "I don't want to use AI as a crutch, but I do use it before a search engine at this point. Again, primarily brainstorming.",
+    "start": 4942,
+    "end": 5063
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0527",
+    "quote": "To me, AI is a tool for those jobs.  Like a calculator, but more advanced.",
+    "start": 7928,
+    "end": 8002
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0880",
+    "quote": "AI will be my calculator. It won't replace my job, but it will be a force multiplier.",
+    "start": 9045,
+    "end": 9130
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0035",
+    "quote": "I don't think there are aspects however of counseling that I think could never be replaced - such as human warmth and a therapeutic relationship",
+    "start": 9045,
+    "end": 9169
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0768",
+    "quote": "I sort of use the AI as a note-taker/summarizer. Someone to corral all my random thoughts, connecting them and helping me shape them into something cohesinve and actionable.",
+    "start": 3449,
+    "end": 3622
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0593",
+    "quote": "I treated the model as a research collaborator, going back and forth.  I challenged it when I thought it was wrong or unclear, or when a command didn't work.",
+    "start": 2175,
+    "end": 2332
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0269",
+    "quote": "I see my relationship with AI becoming more of a collaboration to make work go faster. Sometimes I feel like I'm becoming the AI's assistant and editor instead of the AI being the assistant.",
+    "start": 4271,
+    "end": 4461
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0302",
+    "quote": "At the end of the day, letting AI write your prose is self-defeating, because people enjoy stories because they are connecting with other people. There's a personal bond in creative works, between the creator and the audience, and the more authentic your work is, the more it comes directly from YOU, the more readers will respond, especially in the long term.",
+    "start": 9546,
+    "end": 9906
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0445",
+    "quote": "I would never ask AI to write an entire article, cos if you're doing this, whats the point, we might as well surrender to the computers now.",
+    "start": 4634,
+    "end": 4774
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0797",
+    "quote": "I do not like it when the AI rewrites my copy. It makes it too hard to see what changes were made, and I am ultimately responsible for any and all content---I can't afford to miss a bad AI edit in my work.",
+    "start": 2267,
+    "end": 2472
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0450",
+    "quote": "the time savings are having an impact on the economics of running a law firm, particularly a small firm.  The standard billing method for decades for Canadian law firms has been the billable hour.  The rise of AI is threatening the billable hour like never before since a task that used to take 10 hours, for example, may now be complete in 2 hours, with a corresponding reduction in billable hours.",
+    "start": 7692,
+    "end": 8091
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0143",
+    "quote": "I think poeople get gneuine fulfillment out of their jobs, and I don't want to be in a workplace wher emost of the work is produced by robots, I think I'd find that pretty depressing.",
+    "start": 15329,
+    "end": 15512
+  },
+  {
+    "report": "delegation",
+    "transcript_id": "work_0615",
+    "quote": "I think it's not about AI replacing people - I do, however, think that Managers who do my job without working with AI will be replaced by managers who DO work with AI, since we are going to be a lot more thorough and able to do more work and keep track of more than people who don't utilize AI.",
+    "start": 6192,
+    "end": 6486
+  }
+]
