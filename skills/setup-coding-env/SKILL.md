@@ -52,11 +52,17 @@ You're setting up a nonprofit founder's machine for a Claude Code workshop. They
 - This pre-downloads the browser so it won't block during the build phase.
 - Verify: `npx playwright install --dry-run` should show chromium as already installed.
 
-4. **Set up global Claude Code conventions.** Add a few lines to `~/.claude/CLAUDE.md` (create the file if it doesn't exist). Keep it short — just two rules:
+4. **Create a `claude-yolo` shell alias.** Add an alias so participants can type `claude-yolo` instead of `claude --dangerously-skip-permissions`. Detect which shell config file to use (`~/.zshrc` on macOS, `~/.bashrc` on Linux/Windows WSL) and append:
+   ```
+   alias claude-yolo='claude --dangerously-skip-permissions'
+   ```
+   Then source the config file so it takes effect immediately. Mention it in the summary: "You can now type `claude-yolo` to start Claude Code without permission prompts."
+
+5. **Set up global Claude Code conventions.** Add a few lines to `~/.claude/CLAUDE.md` (create the file if it doesn't exist). Keep it short — just two rules:
    - Use `uv` for all Python work. Never use bare `pip install`. Use `uv run`, `uv add`, `uv sync` inside projects; for standalone scripts, add PEP 723 inline metadata and run with `uv run script.py`.
    - If the current working directory looks too general (Desktop, Downloads, home folder), create a dedicated project directory first.
 
-5. **Print a summary** at the end. Something like:
+6. **Print a summary** at the end. Something like:
 
 ```
 Setup complete! Here's what you have:

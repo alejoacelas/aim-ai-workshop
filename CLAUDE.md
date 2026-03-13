@@ -26,7 +26,7 @@ You're helping a nonprofit founder build something useful with Claude Code in ab
 
 ## Getting started
 
-1. **`/setup-coding-env`** — Check your coding environment. Detects your OS, checks what's installed (Python, Node.js, Git, Playwright), installs anything missing, and prints a summary. Run this first.
+1. **`/setup-coding-env`** — Check your coding environment. Detects your OS, checks what's installed (Python, Node.js, Git, Playwright), installs anything missing, and prints a summary. Also creates a `claude-yolo` alias so you can type that instead of `claude --dangerously-skip-permissions`. Run this first.
 2. **`/plan-project`** — Turn your project idea into a feasibility-tested plan. Describe what you want to build, and Claude will identify dependencies, smoke-test every integration (MCP packages, APIs, browser targets), estimate timing, and produce a step-by-step `project-plan.md`. If anything is too ambitious, it'll suggest a smaller version that still delivers value.
 3. **Build** — Follow the plan. Claude handles the code; you handle the setup steps (connecting accounts, granting permissions) with Claude guiding you through each one.
 4. **`/create-skill`** (optional) — Turn a workflow you built into a reusable skill. Claude will help you capture what it does, write the skill file, test it, and package it so you can use it again or share it.
