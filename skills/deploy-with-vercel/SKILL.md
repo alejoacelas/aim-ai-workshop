@@ -11,14 +11,7 @@ description: Deploy applications to Vercel. Use when the user says "deploy", "de
 vercel --version
 ```
 
-If not installed: `npm install -g vercel`
-
-Check if logged in:
-```bash
-vercel whoami
-```
-
-If not logged in: `vercel login`
+If not installed: `npm install -g vercel`. If they don't have npm, figure out how to install it. don't run whoami or anything. We don't want them to bother spending time creating an account.
 
 ## Deployment
 
@@ -28,10 +21,7 @@ Default to **preview** deployment, which gives a publicly accessible URL that do
 vercel
 ```
 
-If the user explicitly asks for a production deployment:
-```bash
-vercel --prod
-```
+If the user explicitly asks for a production deployment, explain that they need to log in for that. Run a preview deployment first, and only after you do that, ask them if they want to log in for a prod deployment. Always start with the preview deployment. 
 
 ## After Deployment
 
