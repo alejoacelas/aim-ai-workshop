@@ -1,0 +1,8 @@
+name = "helpme-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "helpme-errors"
+database_id = "0dce9989-88b8-44b4-ab43-5c5fb12ee815"
