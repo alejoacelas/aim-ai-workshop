@@ -1,11 +1,10 @@
 # helpme.ps1 — wrap any command, get plain-English help if it fails
 # Usage: helpme -- <command> [args...]
 
+# Accept all remaining arguments as a flat array (avoids "--" being parsed as a parameter)
 param(
-    [Parameter(Position = 0)]
-    [string]$Separator,
-    [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
-    [string[]]$CommandArgs
+    [Parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$AllArgs
 )
 
 $WorkerUrl = "https://helpme-worker.alejoacelas.workers.dev"
@@ -14,48 +13,69 @@ $LogFile = Join-Path $LogDir "log.jsonl"
 $SessionId = "$([int](Get-Date -UFormat %s))-$PID"
 
 # Strip leading "--" if present
-if ($Separator -eq "--" -and $CommandArgs.Count -gt 0) {
-    $Command = $CommandArgs -join " "
-} elseif ($Separator -and $Separator -ne "--") {
-    $Command = (@($Separator) + $CommandArgs) -join " "
-} else {
+if ($AllArgs.Count -gt 0 -and $AllArgs[0] -eq "--") {
+    $AllArgs = $AllArgs[1..($AllArgs.Count - 1)]
+}
+
+if ($AllArgs.Count -eq 0) {
     Write-Host "Usage: helpme -- <command> [args...]"
     Write-Host "Example: helpme -- winget install Git.Git"
     exit 1
 }
+
+$Command = $AllArgs -join " "
 
 # Ensure log directory exists
 if (-not (Test-Path $LogDir)) {
     New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
 }
 
-# Run the command, capturing output
+# Run the command, capturing output while streaming to terminal
+# Use cmd /c on Windows (streams + captures via temp files)
+# Invoke-Expression as fallback (e.g. on macOS pwsh for testing)
 $StdoutFile = [System.IO.Path]::GetTempFileName()
 $StderrFile = [System.IO.Path]::GetTempFileName()
 
-try {
-    $process = Start-Process -FilePath "cmd.exe" -ArgumentList "/c", $Command -NoNewWindow -Wait -PassThru `
-        -RedirectStandardOutput $StdoutFile -RedirectStandardError $StderrFile
-    $ExitCode = $process.ExitCode
-} catch {
-    # Fallback: try running directly via PowerShell
+if ($env:OS -eq "Windows_NT") {
+    # On Windows: use cmd /c which streams to terminal, capture via process redirection
+    $pinfo = New-Object System.Diagnostics.ProcessStartInfo
+    $pinfo.FileName = "cmd.exe"
+    $pinfo.Arguments = "/c $Command"
+    $pinfo.UseShellExecute = $false
+    $pinfo.RedirectStandardOutput = $true
+    $pinfo.RedirectStandardError = $true
+    $proc = [System.Diagnostics.Process]::Start($pinfo)
+
+    # Read output and stream to terminal + capture
+    $stdoutTask = $proc.StandardOutput.ReadToEndAsync()
+    $stderrTask = $proc.StandardError.ReadToEndAsync()
+    $proc.WaitForExit()
+
+    $Stdout = $stdoutTask.Result
+    $Stderr = $stderrTask.Result
+    $ExitCode = $proc.ExitCode
+
+    if ($Stdout) { Write-Host $Stdout }
+    if ($Stderr) { Write-Host $Stderr -ForegroundColor Red }
+} else {
+    # Non-Windows (testing with pwsh on Mac/Linux): use Invoke-Expression
     try {
-        $output = Invoke-Expression $Command 2>&1
+        $output = Invoke-Expression $Command 2>$StderrFile
         $ExitCode = $LASTEXITCODE
         if ($null -eq $ExitCode) { $ExitCode = 0 }
-        $output | Out-File -FilePath $StdoutFile -Encoding utf8
+        $Stdout = ($output | Out-String)
+        # Stream to terminal
+        if ($Stdout) { Write-Host $Stdout }
     } catch {
         $ExitCode = 1
-        $_.Exception.Message | Out-File -FilePath $StderrFile -Encoding utf8
+        Write-Host $_.Exception.Message -ForegroundColor Red
+        $Stderr = $_.Exception.Message
+        $Stdout = ""
+    }
+    if (-not $Stderr) {
+        $Stderr = if (Test-Path $StderrFile) { Get-Content $StderrFile -Raw -ErrorAction SilentlyContinue } else { "" }
     }
 }
-
-$Stdout = if (Test-Path $StdoutFile) { Get-Content $StdoutFile -Raw -ErrorAction SilentlyContinue } else { "" }
-$Stderr = if (Test-Path $StderrFile) { Get-Content $StderrFile -Raw -ErrorAction SilentlyContinue } else { "" }
-
-# Print captured output to terminal
-if ($Stdout) { Write-Host $Stdout }
-if ($Stderr) { Write-Host $Stderr -ForegroundColor Red }
 
 # Clean up temp files
 Remove-Item $StdoutFile, $StderrFile -ErrorAction SilentlyContinue
@@ -68,8 +88,8 @@ $Shell = "powershell"
 $LogEntry = @{
     timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
     command   = $Command
-    stdout    = if ($Stdout.Length -gt 2000) { $Stdout.Substring(0, 2000) } else { $Stdout }
-    stderr    = if ($Stderr -and $Stderr.Length -gt 2000) { $Stderr.Substring(0, 2000) } else { $Stderr }
+    stdout    = if ($Stdout -and $Stdout.Length -gt 2000) { $Stdout.Substring(0, 2000) } else { if ($Stdout) { $Stdout } else { "" } }
+    stderr    = if ($Stderr -and $Stderr.Length -gt 2000) { $Stderr.Substring(0, 2000) } else { if ($Stderr) { $Stderr } else { "" } }
     exit_code = $ExitCode
     os        = $Os
     shell     = $Shell
@@ -91,8 +111,8 @@ if (Test-Path $LogFile) {
 # Build request payload
 $Payload = @{
     command     = $Command
-    stdout      = if ($Stdout.Length -gt 3000) { $Stdout.Substring(0, 3000) } else { $Stdout }
-    stderr      = if ($Stderr -and $Stderr.Length -gt 3000) { $Stderr.Substring(0, 3000) } else { $Stderr }
+    stdout      = if ($Stdout -and $Stdout.Length -gt 3000) { $Stdout.Substring(0, 3000) } else { if ($Stdout) { $Stdout } else { "" } }
+    stderr      = if ($Stderr -and $Stderr.Length -gt 3000) { $Stderr.Substring(0, 3000) } else { if ($Stderr) { $Stderr } else { "" } }
     exit_code   = $ExitCode
     os          = $Os
     shell       = $Shell

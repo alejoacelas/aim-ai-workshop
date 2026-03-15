@@ -28,9 +28,10 @@ try {
 }
 
 # 3. Create a .cmd wrapper so "helpme" works from any shell without execution policy issues
+# Use -Command instead of -File so that "--" is passed as a string argument, not consumed by pwsh
 @"
 @echo off
-powershell -ExecutionPolicy Bypass -File "%~dp0helpme.ps1" %*
+powershell -ExecutionPolicy Bypass -Command "& '%~dp0helpme.ps1' %*"
 "@ | Set-Content -Path $CmdWrapper -Encoding ASCII
 
 # 4. Add to PATH if not already there
