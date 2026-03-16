@@ -29,4 +29,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Debug - test helpme.ps1 directly
+        shell: pwsh
+        run: |
+          $env:HELPME_WORKER_URL = "http://localhost:0"
+          $env:HELPME_LOG_DIR = "$([System.IO.Path]::GetTempPath())/helpme-debug"
+          New-Item -ItemType Directory -Path $env:HELPME_LOG_DIR -Force | Out-Null
+          Write-Host "--- Running: pwsh helpme/helpme.ps1 -- echo hello ---"
+          $proc = Start-Process -FilePath "pwsh" -ArgumentList "-File","helpme/helpme.ps1","--","echo","hello" -Wait -PassThru -NoNewWindow -RedirectStandardError "$env:HELPME_LOG_DIR/stderr.txt" 2>$null
+          Write-Host "Process exit code: $($proc.ExitCode)"
+          if (Test-Path "$env:HELPME_LOG_DIR/stderr.txt") { Write-Host "STDERR:"; Get-Content "$env:HELPME_LOG_DIR/stderr.txt" }
+          if (Test-Path "$env:HELPME_LOG_DIR/log.jsonl") { Write-Host "LOG:"; Get-Content "$env:HELPME_LOG_DIR/log.jsonl" } else { Write-Host "NO LOG FILE" }
+        continue-on-error: true
       - run: pwsh helpme/tests/test_helpme.ps1
