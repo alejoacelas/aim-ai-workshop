@@ -157,45 +157,45 @@ function Invoke-HelpmeRun {
         log_history = @($LogHistory)
     } | ConvertTo-Json -Depth 3
 
+    # Helper: build and write log entry
+    function Write-LogEntry($WorkerOk, $WorkerExplanation, $WorkerFixCommands) {
+        $entry = @{
+            timestamp    = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            command      = $Command
+            stdout       = if ($Stdout -and $Stdout.Length -gt 2000) { $Stdout.Substring(0, 2000) } else { if ($Stdout) { $Stdout } else { "" } }
+            stderr       = if ($Stderr -and $Stderr.Length -gt 2000) { $Stderr.Substring(0, 2000) } else { if ($Stderr) { $Stderr } else { "" } }
+            exit_code    = $ExitCode
+            os           = $Os
+            shell        = $Shell
+            ok           = $WorkerOk
+            explanation  = if ($WorkerExplanation) { $WorkerExplanation } else { "" }
+            fix_commands = if ($WorkerFixCommands) { @($WorkerFixCommands) } else { @() }
+            duration     = $Duration
+        } | ConvertTo-Json -Compress
+        Add-Content -Path $LogFile -Value $entry -Encoding UTF8 -ErrorAction SilentlyContinue
+    }
+
     # POST to worker
     $Response = $null
     try {
         $Response = Invoke-RestMethod -Uri "$WorkerUrl/analyze" -Method Post `
-            -ContentType "application/json" -Body $Payload -TimeoutSec 15
+            -ContentType "application/json" -Body $Payload -TimeoutSec 15 -ErrorAction Stop
     } catch {
+        Write-LogEntry $null "" @()
         if ($ExitCode -ne 0) {
             Write-Host ""
             Write-Host "The command failed (exit code $ExitCode) but couldn't reach the help service." -ForegroundColor Yellow
             Write-Host "Check your internet connection and try again." -ForegroundColor DarkGray
         }
+        exit $ExitCode
     }
 
     # Extract worker response fields
-    $Ok = if ($Response -and $null -ne $Response.ok) { $Response.ok } else { $null }
-    $Explanation = if ($Response -and $Response.explanation) { $Response.explanation } else { "" }
-    $FixCommands = if ($Response -and $Response.fix_commands) { @($Response.fix_commands) } else { @() }
+    $Ok = if ($null -ne $Response.ok) { $Response.ok } else { $null }
+    $Explanation = if ($Response.explanation) { $Response.explanation } else { "" }
+    $FixCommands = if ($Response.fix_commands) { @($Response.fix_commands) } else { @() }
 
-    # Build and write log entry with all fields (including worker response)
-    $LogEntry = @{
-        timestamp    = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
-        command      = $Command
-        stdout       = if ($Stdout -and $Stdout.Length -gt 2000) { $Stdout.Substring(0, 2000) } else { if ($Stdout) { $Stdout } else { "" } }
-        stderr       = if ($Stderr -and $Stderr.Length -gt 2000) { $Stderr.Substring(0, 2000) } else { if ($Stderr) { $Stderr } else { "" } }
-        exit_code    = $ExitCode
-        os           = $Os
-        shell        = $Shell
-        ok           = $Ok
-        explanation  = $Explanation
-        fix_commands = $FixCommands
-        duration     = $Duration
-    } | ConvertTo-Json -Compress
-
-    Add-Content -Path $LogFile -Value $LogEntry -Encoding UTF8 -ErrorAction SilentlyContinue
-
-    # Display results
-    if ($null -eq $Response) {
-        exit $ExitCode
-    }
+    Write-LogEntry $Ok $Explanation $FixCommands
 
     if ($Ok -eq $true -and $Explanation) {
         Write-Host ""
