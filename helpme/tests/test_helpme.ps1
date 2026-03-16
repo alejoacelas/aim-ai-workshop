@@ -1,5 +1,9 @@
 #!/usr/bin/env pwsh
 # Test suite for helpme.ps1
+#
+# Uses "pwsh -Command" (not "pwsh -File") to invoke the script because
+# -File mode has a known limitation where ValueFromRemainingArguments
+# only binds the first argument when multiple positional args follow --.
 
 $ErrorActionPreference = "Continue"
 $Helpme = Join-Path (Split-Path $PSScriptRoot) "helpme.ps1"
@@ -54,30 +58,30 @@ Write-Host "=== helpme.ps1 test suite ==="
 Write-Host ""
 
 Write-Host "-- help and version --"
-Assert-ExitCode      "--help exits 0"                    0 { pwsh -File $Helpme --help }
-Assert-ExitCode      "-h exits 0"                        0 { pwsh -File $Helpme -h }
-Assert-ExitCode      "help subcommand exits 0"           0 { pwsh -File $Helpme help }
-Assert-ExitCode      "no args exits 0 (shows help)"      0 { pwsh -File $Helpme }
-Assert-OutputContains "--help shows Usage:"              "Usage:" { pwsh -File $Helpme --help }
-Assert-OutputContains "--help shows examples"            "Examples:" { pwsh -File $Helpme --help }
-Assert-OutputContains "--help shows version"             "v0.2.0" { pwsh -File $Helpme --help }
+Assert-ExitCode      "--help exits 0"                    0 { pwsh -Command "& '$Helpme' --help" }
+Assert-ExitCode      "-h exits 0"                        0 { pwsh -Command "& '$Helpme' -h" }
+Assert-ExitCode      "help subcommand exits 0"           0 { pwsh -Command "& '$Helpme' help" }
+Assert-ExitCode      "no args exits 0 (shows help)"      0 { pwsh -Command "& '$Helpme'" }
+Assert-OutputContains "--help shows Usage:"              "Usage:" { pwsh -Command "& '$Helpme' --help" }
+Assert-OutputContains "--help shows examples"            "Examples:" { pwsh -Command "& '$Helpme' --help" }
+Assert-OutputContains "--help shows version"             "v0.2.0" { pwsh -Command "& '$Helpme' --help" }
 
-Assert-ExitCode      "--version exits 0"                 0 { pwsh -File $Helpme --version }
-Assert-ExitCode      "-v exits 0"                        0 { pwsh -File $Helpme -v }
-Assert-OutputContains "--version prints version"         "helpme 0.2.0" { pwsh -File $Helpme --version }
+Assert-ExitCode      "--version exits 0"                 0 { pwsh -Command "& '$Helpme' --version" }
+Assert-ExitCode      "-v exits 0"                        0 { pwsh -Command "& '$Helpme' -v" }
+Assert-OutputContains "--version prints version"         "helpme 0.2.0" { pwsh -Command "& '$Helpme' --version" }
 
 Write-Host ""
 Write-Host "-- command execution --"
-Assert-ExitCode      "-- echo hello exits 0"             0 { pwsh -File $Helpme -- echo hello }
-Assert-OutputContains "-- echo hello outputs hello"      "hello" { pwsh -File $Helpme -- echo hello }
-Assert-ExitCode      "run -- echo hello exits 0"         0 { pwsh -File $Helpme run -- echo hello }
+Assert-ExitCode      "-- echo hello exits 0"             0 { pwsh -Command "& '$Helpme' -- echo hello" }
+Assert-OutputContains "-- echo hello outputs hello"      "hello" { pwsh -Command "& '$Helpme' -- echo hello" }
+Assert-ExitCode      "run -- echo hello exits 0"         0 { pwsh -Command "& '$Helpme' run -- echo hello" }
 
 Write-Host ""
 Write-Host "-- log file --"
 # Clear log and run a command so we can inspect the entry
 $logPath = Join-Path $TestDir "log.jsonl"
 Remove-Item $logPath -ErrorAction SilentlyContinue
-pwsh -File $Helpme -- echo logtest 2>&1 | Out-Null
+pwsh -Command "& '$Helpme' -- echo logtest" 2>&1 | Out-Null
 
 if (Test-Path $logPath) {
     Write-Host "  ✓ log file created after run"
@@ -102,7 +106,7 @@ if (Test-Path $logPath) {
 
 Write-Host ""
 Write-Host "-- dispatcher routing --"
-Assert-OutputContains "bare command falls through to run" "hello" { pwsh -File $Helpme echo hello }
+Assert-OutputContains "bare command falls through to run" "hello" { pwsh -Command "& '$Helpme' echo hello" }
 
 # --- Cleanup ---
 
