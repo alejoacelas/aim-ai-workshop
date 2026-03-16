@@ -32,13 +32,19 @@ jobs:
       - name: Debug - test helpme.ps1 directly
         shell: pwsh
         run: |
+          $ErrorActionPreference = "Continue"
           $env:HELPME_WORKER_URL = "http://localhost:0"
-          $env:HELPME_LOG_DIR = "$([System.IO.Path]::GetTempPath())/helpme-debug"
+          $env:HELPME_LOG_DIR = "$([System.IO.Path]::GetTempPath())helpme-debug"
           New-Item -ItemType Directory -Path $env:HELPME_LOG_DIR -Force | Out-Null
-          Write-Host "--- Running: pwsh helpme/helpme.ps1 -- echo hello ---"
-          $proc = Start-Process -FilePath "pwsh" -ArgumentList "-File","helpme/helpme.ps1","--","echo","hello" -Wait -PassThru -NoNewWindow -RedirectStandardError "$env:HELPME_LOG_DIR/stderr.txt" 2>$null
-          Write-Host "Process exit code: $($proc.ExitCode)"
-          if (Test-Path "$env:HELPME_LOG_DIR/stderr.txt") { Write-Host "STDERR:"; Get-Content "$env:HELPME_LOG_DIR/stderr.txt" }
-          if (Test-Path "$env:HELPME_LOG_DIR/log.jsonl") { Write-Host "LOG:"; Get-Content "$env:HELPME_LOG_DIR/log.jsonl" } else { Write-Host "NO LOG FILE" }
+          Write-Host "LOG_DIR: $env:HELPME_LOG_DIR"
+          Write-Host "--- Running: pwsh -File helpme/helpme.ps1 echo hello ---"
+          $allOutput = & pwsh -File helpme/helpme.ps1 echo hello 2>&1
+          Write-Host "LASTEXITCODE: $LASTEXITCODE"
+          Write-Host "ALL OUTPUT:"
+          $allOutput | ForEach-Object { Write-Host "  [$($_.GetType().Name)] $_" }
+          Write-Host "ERROR STREAM ($($Error.Count) entries):"
+          $Error | ForEach-Object { Write-Host "  ERR: $_" }
+          $logPath = Join-Path $env:HELPME_LOG_DIR "log.jsonl"
+          if (Test-Path $logPath) { Write-Host "LOG:"; Get-Content $logPath } else { Write-Host "NO LOG FILE at $logPath" }
         continue-on-error: true
       - run: pwsh helpme/tests/test_helpme.ps1
