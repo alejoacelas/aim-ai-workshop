@@ -7,7 +7,7 @@ Cloudflare Worker that powers the `helpme` CLI tool. Receives command output, an
 After any code change, you must deploy **and then re-set the API key secret** (the secret doesn't survive deploys):
 
 ```bash
-cd helpme-worker
+cd helpme/worker
 npx wrangler deploy
 ```
 

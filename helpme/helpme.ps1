@@ -7,10 +7,14 @@ param(
     [string[]]$AllArgs
 )
 
+# TLS 1.2 — PowerShell 5.1 defaults to TLS 1.0, which many endpoints reject
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $WorkerUrl = "https://helpme-worker.alejoacelas.workers.dev"
-$LogDir = Join-Path $env:USERPROFILE ".helpme"
+$HomeDir = if ($env:USERPROFILE) { $env:USERPROFILE } else { $env:HOME }
+$LogDir = Join-Path $HomeDir ".helpme"
 $LogFile = Join-Path $LogDir "log.jsonl"
-$SessionId = "$([int](Get-Date -UFormat %s))-$PID"
+$SessionId = "$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())-$PID"
 
 # Strip leading "--" if present
 if ($AllArgs.Count -gt 0 -and $AllArgs[0] -eq "--") {
@@ -30,33 +34,53 @@ if (-not (Test-Path $LogDir)) {
     New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
 }
 
-# Run the command, capturing output while streaming to terminal
-# Use cmd /c on Windows (streams + captures via temp files)
-# Invoke-Expression as fallback (e.g. on macOS pwsh for testing)
-$StdoutFile = [System.IO.Path]::GetTempFileName()
+# Run the command, capturing output while streaming to terminal in real time
 $StderrFile = [System.IO.Path]::GetTempFileName()
 
 if ($env:OS -eq "Windows_NT") {
-    # On Windows: use cmd /c which streams to terminal, capture via process redirection
+    # Windows: use cmd /c with event-based async output for real-time streaming
     $pinfo = New-Object System.Diagnostics.ProcessStartInfo
     $pinfo.FileName = "cmd.exe"
     $pinfo.Arguments = "/c $Command"
     $pinfo.UseShellExecute = $false
     $pinfo.RedirectStandardOutput = $true
     $pinfo.RedirectStandardError = $true
-    $proc = [System.Diagnostics.Process]::Start($pinfo)
 
-    # Read output and stream to terminal + capture
-    $stdoutTask = $proc.StandardOutput.ReadToEndAsync()
-    $stderrTask = $proc.StandardError.ReadToEndAsync()
+    $proc = New-Object System.Diagnostics.Process
+    $proc.StartInfo = $pinfo
+
+    # Collect output in StringBuilders while streaming each line to the terminal
+    $stdoutBuilder = New-Object System.Text.StringBuilder
+    $stderrBuilder = New-Object System.Text.StringBuilder
+
+    $stdoutEvent = Register-ObjectEvent -InputObject $proc -EventName OutputDataReceived -Action {
+        if ($null -ne $EventArgs.Data) {
+            $Event.MessageData.AppendLine($EventArgs.Data) | Out-Null
+            [Console]::WriteLine($EventArgs.Data)
+        }
+    } -MessageData $stdoutBuilder
+
+    $stderrEvent = Register-ObjectEvent -InputObject $proc -EventName ErrorDataReceived -Action {
+        if ($null -ne $EventArgs.Data) {
+            $Event.MessageData.AppendLine($EventArgs.Data) | Out-Null
+            [Console]::Error.WriteLine($EventArgs.Data)
+        }
+    } -MessageData $stderrBuilder
+
+    $proc.Start() | Out-Null
+    $proc.BeginOutputReadLine()
+    $proc.BeginErrorReadLine()
     $proc.WaitForExit()
 
-    $Stdout = $stdoutTask.Result
-    $Stderr = $stderrTask.Result
-    $ExitCode = $proc.ExitCode
+    # Let async event handlers flush (PS 5.1 doesn't guarantee delivery before WaitForExit returns)
+    Start-Sleep -Milliseconds 100
 
-    if ($Stdout) { Write-Host $Stdout }
-    if ($Stderr) { Write-Host $Stderr -ForegroundColor Red }
+    Unregister-Event -SourceIdentifier $stdoutEvent.Name
+    Unregister-Event -SourceIdentifier $stderrEvent.Name
+
+    $Stdout = $stdoutBuilder.ToString()
+    $Stderr = $stderrBuilder.ToString()
+    $ExitCode = $proc.ExitCode
 } else {
     # Non-Windows (testing with pwsh on Mac/Linux): use Invoke-Expression
     try {
@@ -64,7 +88,6 @@ if ($env:OS -eq "Windows_NT") {
         $ExitCode = $LASTEXITCODE
         if ($null -eq $ExitCode) { $ExitCode = 0 }
         $Stdout = ($output | Out-String)
-        # Stream to terminal
         if ($Stdout) { Write-Host $Stdout }
     } catch {
         $ExitCode = 1
@@ -78,15 +101,15 @@ if ($env:OS -eq "Windows_NT") {
 }
 
 # Clean up temp files
-Remove-Item $StdoutFile, $StderrFile -ErrorAction SilentlyContinue
+Remove-Item $StderrFile -ErrorAction SilentlyContinue
 
-# Detect OS info
-$Os = "windows"
-$Shell = "powershell"
+# Detect OS and shell at runtime
+$Os = if ($env:OS -eq "Windows_NT") { "windows" } elseif ($IsMacOS) { "darwin" } else { "linux" }
+$Shell = if ($PSVersionTable.PSEdition -eq "Core") { "pwsh" } else { "powershell" }
 
 # Build log entry
 $LogEntry = @{
-    timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
+    timestamp = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
     command   = $Command
     stdout    = if ($Stdout -and $Stdout.Length -gt 2000) { $Stdout.Substring(0, 2000) } else { if ($Stdout) { $Stdout } else { "" } }
     stderr    = if ($Stderr -and $Stderr.Length -gt 2000) { $Stderr.Substring(0, 2000) } else { if ($Stderr) { $Stderr } else { "" } }
@@ -95,12 +118,12 @@ $LogEntry = @{
     shell     = $Shell
 } | ConvertTo-Json -Compress
 
-Add-Content -Path $LogFile -Value $LogEntry -ErrorAction SilentlyContinue
+Add-Content -Path $LogFile -Value $LogEntry -Encoding UTF8 -ErrorAction SilentlyContinue
 
 # Read recent log history
 $LogHistory = @()
 if (Test-Path $LogFile) {
-    $lines = Get-Content $LogFile -Tail 6 -ErrorAction SilentlyContinue
+    $lines = Get-Content $LogFile -Tail 6 -Encoding UTF8 -ErrorAction SilentlyContinue
     if ($lines.Count -gt 1) {
         $LogHistory = $lines[0..($lines.Count - 2)] | ForEach-Object {
             try { $_ | ConvertFrom-Json } catch { $null }

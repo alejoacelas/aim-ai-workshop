@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # install-helpme.sh — one-line installer for the helpme CLI
-# Usage: curl -fsSL https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/install-helpme.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/helpme/install.sh | bash
 { # ensure the entire script is downloaded before execution begins
 set -euo pipefail
 
 BIN_DIR="$HOME/.local/bin"
-SCRIPT_URL="https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/helpme.sh"
+SCRIPT_URL="https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/helpme/helpme.sh"
 SCRIPT_PATH="$BIN_DIR/helpme"
 
 # Only use colors when connected to a terminal
