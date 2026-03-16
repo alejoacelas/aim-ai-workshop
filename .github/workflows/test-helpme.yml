@@ -1,0 +1,30 @@
+name: Test helpme
+
+on:
+  push:
+    paths:
+      - "helpme/**"
+      - ".github/workflows/test-helpme.yml"
+  pull_request:
+    paths:
+      - "helpme/**"
+      - ".github/workflows/test-helpme.yml"
+
+jobs:
+  bash-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash helpme/tests/test_helpme.sh
+
+  powershell-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: pwsh helpme/tests/test_helpme.ps1
