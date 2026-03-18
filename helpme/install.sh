@@ -76,13 +76,18 @@ elif [[ -n "${BASH_VERSION:-}" ]] || [[ "$(basename "${SHELL:-}")" == "bash" ]];
     if add_to_path "$HOME/.bashrc"; then :; else PATH_ADDED=true; NEEDS_RELOAD="$HOME/.bashrc"; fi
   fi
 else
-  # Unknown shell — try both
+  # Unknown shell — try existing RC files first, fall back to creating .bashrc
+  found=false
   for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
     if [[ -f "$rc" ]]; then
       if add_to_path "$rc"; then :; else PATH_ADDED=true; NEEDS_RELOAD="$rc"; fi
+      found=true
       break
     fi
   done
+  if [[ "$found" == "false" ]]; then
+    if add_to_path "$HOME/.bashrc"; then :; else PATH_ADDED=true; NEEDS_RELOAD="$HOME/.bashrc"; fi
+  fi
 fi
 
 # Also add to current session so it works immediately

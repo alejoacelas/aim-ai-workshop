@@ -245,10 +245,12 @@ build_log_history() {
 }
 
 # --- Dispatcher ---
-case "${1:-}" in
-  --help|-h|help) cmd_help ;;
-  --version|-v)   cmd_version ;;
-  run)            shift; cmd_run "$@" ;;
-  "")             cmd_help ;;
-  *)              cmd_run "$@" ;;
-esac
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  case "${1:-}" in
+    --help|-h|help) cmd_help ;;
+    --version|-v)   cmd_version ;;
+    run)            shift; cmd_run "$@" ;;
+    "")             cmd_help ;;
+    *)              cmd_run "$@" ;;
+  esac
+fi
