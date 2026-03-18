@@ -85,24 +85,20 @@ $logPath = Join-Path $TestDir "log.jsonl"
 Remove-Item $logPath -ErrorAction SilentlyContinue
 & $PwshExe -Command "& '$Helpme' -- echo logtest" 2>&1 | Out-Null
 
-if (-not (Test-Path $logPath)) {
+$logExists = Test-Path $logPath
+if (-not $logExists) {
     Write-Host "  ✗ log file not created"
     $script:Fail++
-} else {
+}
+if ($logExists) {
     Write-Host "  ✓ log file created after run"
     $script:Pass++
 
     $lastLine = Get-Content $logPath -Tail 1
     $fields = @("timestamp", "command", "exit_code", "os", "shell", "ok", "explanation", "fix_commands", "duration")
     foreach ($field in $fields) {
-        if ($lastLine -match "`"$field`"") {
-            Write-Host "  ✓ log entry contains '$field'"
-            $script:Pass++
-        } else {
-            Write-Host "  ✗ log entry missing '$field'"
-            Write-Host "    entry: $lastLine"
-            $script:Fail++
-        }
+        if ($lastLine -match "`"$field`"") { Write-Host "  ✓ log entry contains '$field'"; $script:Pass++ }
+        else { Write-Host "  ✗ log entry missing '$field'"; Write-Host "    entry: $lastLine"; $script:Fail++ }
     }
 }
 
