@@ -6,6 +6,8 @@
 # only binds the first argument when multiple positional args follow --.
 
 $ErrorActionPreference = "Continue"
+# Use whichever PowerShell is running this test (pwsh 7+ or powershell 5.1)
+$PwshExe = (Get-Process -Id $PID).Path
 $Helpme = Join-Path (Split-Path $PSScriptRoot) "helpme.ps1"
 $Pass = 0
 $Fail = 0
@@ -58,32 +60,35 @@ Write-Host "=== helpme.ps1 test suite ==="
 Write-Host ""
 
 Write-Host "-- help and version --"
-Assert-ExitCode      "--help exits 0"                    0 { pwsh -Command "& '$Helpme' --help" }
-Assert-ExitCode      "-h exits 0"                        0 { pwsh -Command "& '$Helpme' -h" }
-Assert-ExitCode      "help subcommand exits 0"           0 { pwsh -Command "& '$Helpme' help" }
-Assert-ExitCode      "no args exits 0 (shows help)"      0 { pwsh -Command "& '$Helpme'" }
-Assert-OutputContains "--help shows Usage:"              "Usage:" { pwsh -Command "& '$Helpme' --help" }
-Assert-OutputContains "--help shows examples"            "Examples:" { pwsh -Command "& '$Helpme' --help" }
-Assert-OutputContains "--help shows version"             "v0.2.0" { pwsh -Command "& '$Helpme' --help" }
+Assert-ExitCode      "--help exits 0"                    0 { & $PwshExe -Command "& '$Helpme' --help" }
+Assert-ExitCode      "-h exits 0"                        0 { & $PwshExe -Command "& '$Helpme' -h" }
+Assert-ExitCode      "help subcommand exits 0"           0 { & $PwshExe -Command "& '$Helpme' help" }
+Assert-ExitCode      "no args exits 0 (shows help)"      0 { & $PwshExe -Command "& '$Helpme'" }
+Assert-OutputContains "--help shows Usage:"              "Usage:" { & $PwshExe -Command "& '$Helpme' --help" }
+Assert-OutputContains "--help shows examples"            "Examples:" { & $PwshExe -Command "& '$Helpme' --help" }
+Assert-OutputContains "--help shows version"             "v0.2.0" { & $PwshExe -Command "& '$Helpme' --help" }
 
-Assert-ExitCode      "--version exits 0"                 0 { pwsh -Command "& '$Helpme' --version" }
-Assert-ExitCode      "-v exits 0"                        0 { pwsh -Command "& '$Helpme' -v" }
-Assert-OutputContains "--version prints version"         "helpme 0.2.0" { pwsh -Command "& '$Helpme' --version" }
+Assert-ExitCode      "--version exits 0"                 0 { & $PwshExe -Command "& '$Helpme' --version" }
+Assert-ExitCode      "-v exits 0"                        0 { & $PwshExe -Command "& '$Helpme' -v" }
+Assert-OutputContains "--version prints version"         "helpme 0.2.0" { & $PwshExe -Command "& '$Helpme' --version" }
 
 Write-Host ""
 Write-Host "-- command execution --"
-Assert-ExitCode      "-- echo hello exits 0"             0 { pwsh -Command "& '$Helpme' -- echo hello" }
-Assert-OutputContains "-- echo hello outputs hello"      "hello" { pwsh -Command "& '$Helpme' -- echo hello" }
-Assert-ExitCode      "run -- echo hello exits 0"         0 { pwsh -Command "& '$Helpme' run -- echo hello" }
+Assert-ExitCode      "-- echo hello exits 0"             0 { & $PwshExe -Command "& '$Helpme' -- echo hello" }
+Assert-OutputContains "-- echo hello outputs hello"      "hello" { & $PwshExe -Command "& '$Helpme' -- echo hello" }
+Assert-ExitCode      "run -- echo hello exits 0"         0 { & $PwshExe -Command "& '$Helpme' run -- echo hello" }
 
 Write-Host ""
 Write-Host "-- log file --"
 # Clear log and run a command so we can inspect the entry
 $logPath = Join-Path $TestDir "log.jsonl"
 Remove-Item $logPath -ErrorAction SilentlyContinue
-pwsh -Command "& '$Helpme' -- echo logtest" 2>&1 | Out-Null
+& $PwshExe -Command "& '$Helpme' -- echo logtest" 2>&1 | Out-Null
 
-if (Test-Path $logPath) {
+if (-not (Test-Path $logPath)) {
+    Write-Host "  ✗ log file not created"
+    $script:Fail++
+} else {
     Write-Host "  ✓ log file created after run"
     $script:Pass++
 
@@ -99,14 +104,11 @@ if (Test-Path $logPath) {
             $script:Fail++
         }
     }
-} else {
-    Write-Host "  ✗ log file not created"
-    $script:Fail++
 }
 
 Write-Host ""
 Write-Host "-- dispatcher routing --"
-Assert-OutputContains "bare command falls through to run" "hello" { pwsh -Command "& '$Helpme' echo hello" }
+Assert-OutputContains "bare command falls through to run" "hello" { & $PwshExe -Command "& '$Helpme' echo hello" }
 
 # --- Cleanup ---
 

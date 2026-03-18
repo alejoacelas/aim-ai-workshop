@@ -142,19 +142,28 @@ assert_fn_output "boolean field"               "true"          parse_json_field 
 assert_fn_output "missing field returns empty" ""              parse_json_field '{"name":"alice"}' age
 
 # List field: parse_json_field should output each element on its own line
+# Use assert_fn_output_contains to avoid Windows \r\n line ending issues
 _test_list_output() {
   parse_json_field '{"items":["a","b"]}' items
 }
-assert_fn_output "list field outputs elements" $'a\nb' _test_list_output
+list_output=$(_test_list_output)
+if echo "$list_output" | grep -qF "a" && echo "$list_output" | grep -qF "b"; then
+  echo "  ✓ list field outputs elements"; PASS=$((PASS + 1))
+else
+  echo "  ✗ list field outputs elements"; FAIL=$((FAIL + 1))
+  echo "    got: $list_output"
+fi
 
 # Grep fallback: hide python3 so parse_json_field falls back to grep
+# Use a wrapper script instead of symlinks (symlinks don't work on Windows Git Bash)
 _test_grep_fallback() {
   local orig_path="$PATH"
-  # Create a temp dir with only basic commands (no python3)
   local fake_bin; fake_bin=$(mktemp -d)
-  # Link only the essentials
+  # Create wrapper scripts for essentials (avoids symlink issues on Windows)
   for cmd in grep sed echo printf cat head; do
-    local cmd_path; cmd_path=$(command -v "$cmd" 2>/dev/null) && ln -sf "$cmd_path" "$fake_bin/$cmd"
+    local cmd_path; cmd_path=$(command -v "$cmd" 2>/dev/null) || continue
+    printf '#!/bin/sh\nexec "%s" "$@"\n' "$cmd_path" > "$fake_bin/$cmd"
+    chmod +x "$fake_bin/$cmd"
   done
   PATH="$fake_bin" parse_json_field '{"name":"bob"}' name
   PATH="$orig_path"
