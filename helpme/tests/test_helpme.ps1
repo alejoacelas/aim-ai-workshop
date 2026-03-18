@@ -100,8 +100,7 @@ if ($logExists) { $lastLine = Get-Content $logPath -Tail 1 }
 $fields = @("timestamp", "command", "exit_code", "os", "shell", "ok", "explanation", "fix_commands", "duration")
 foreach ($field in $fields) {
     if (-not $logExists) { continue }
-    if ($lastLine -match "`"$field`"") { Write-Host "  ✓ log entry contains '$field'"; $script:Pass++ }
-    else { Write-Host "  ✗ log entry missing '$field'"; Write-Host "    entry: $lastLine"; $script:Fail++ }
+    if ($lastLine -match "`"$field`"") { Write-Host "  ✓ log entry contains '$field'"; $script:Pass++ } else { Write-Host "  ✗ log entry missing '$field'"; Write-Host "    entry: $lastLine"; $script:Fail++ }
 }
 
 Write-Host ""
