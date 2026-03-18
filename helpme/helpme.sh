@@ -71,15 +71,17 @@ cmd_help() {
 helpme v$VERSION — wrap any command, get plain-English help if it fails
 
 Usage:
-  helpme -- <command>       Run a command with automatic error analysis
-  helpme run -- <command>   Same as above (explicit)
+  helpme "<command>"        Run a command with automatic error analysis
   helpme --help             Show this help
   helpme --version          Show version
 
 Examples:
-  helpme -- brew install git
-  helpme -- npm start
-  helpme -- pip install requests
+  helpme "brew install git"
+  helpme "npm start"
+  helpme "pip install requests"
+  helpme "cat log.txt | grep error"
+
+For simple commands, quotes are optional: helpme brew install git
 EOF
 }
 
