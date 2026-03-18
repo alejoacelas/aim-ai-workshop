@@ -7,6 +7,8 @@ set -euo pipefail
 BIN_DIR="$HOME/.local/bin"
 SCRIPT_URL="https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/helpme/helpme.sh"
 SCRIPT_PATH="$BIN_DIR/helpme"
+WORKER_BASE_URL="${HELPME_WORKER_URL:-https://helpme-worker.alejoacelas.workers.dev}"
+INSTALL_URL="${HELPME_INSTALL_URL:-${WORKER_BASE_URL%/}/install}"
 
 # Only use colors when connected to a terminal
 if [[ -t 1 ]]; then
@@ -18,11 +20,41 @@ else
   GREEN='' YELLOW='' DIM='' RESET=''
 fi
 
+json_escape() {
+  local s="${1:-}"
+  s="${s//\\/\\\\}"
+  s="${s//\"/\\\"}"
+  s="${s//$'\n'/\\n}"
+  s="${s//$'\r'/\\r}"
+  s="${s//$'\t'/\\t}"
+  printf '%s' "$s"
+}
+
+send_install_telemetry() {
+  local success="$1" step="$2" error_message="${3:-}"
+  local os
+  os=$(uname -s 2>/dev/null | tr '[:upper:]' '[:lower:]')
+  local payload
+  payload=$(printf '{"os":"%s","success":%s,"step":"%s","error":"%s"}' \
+    "$(json_escape "$os")" \
+    "$success" \
+    "$(json_escape "$step")" \
+    "$(json_escape "$error_message")")
+
+  (
+    set +e
+    printf '%s' "$payload" | curl -sS --max-time 3 -X POST "$INSTALL_URL" \
+      -H "Content-Type: application/json" \
+      --data-binary @- >/dev/null 2>&1 || true
+  ) &
+}
+
 echo ""
 echo "Installing helpme..."
 
 # 1. Check for curl (should always be there if they reached this script, but be safe)
 if ! command -v curl &>/dev/null; then
+  send_install_telemetry false "check_curl" "curl is required but not installed"
   echo -e "${YELLOW}Error: curl is required but not installed.${RESET}"
   echo "  On Mac: it's built in — something is very wrong."
   echo "  On Ubuntu/Debian: sudo apt install curl"
@@ -35,6 +67,7 @@ mkdir -p "$BIN_DIR"
 
 # 3. Download helpme
 if ! curl -fsSL "$SCRIPT_URL" -o "$SCRIPT_PATH"; then
+  send_install_telemetry false "download" "failed to download helpme script"
   echo ""
   echo -e "${YELLOW}Download failed.${RESET}"
   echo "  If you're on a corporate network, the download URL might be blocked."
@@ -106,7 +139,9 @@ if [[ "$PATH_ADDED" == "true" ]]; then
   echo ""
   echo -e "${DIM}Or just open a new terminal window.${RESET}"
 else
-  echo -e "${DIM}Try it:${RESET}  helpme -- echo 'hello world'"
+  echo -e "${DIM}Try it:${RESET}  helpme \"echo 'hello world'\""
 fi
 echo ""
+
+send_install_telemetry true "complete" ""
 } # end of full-download wrapper

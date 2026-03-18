@@ -10,6 +10,31 @@ $BinDir = "$env:USERPROFILE\.local\bin"
 $ScriptUrl = "https://raw.githubusercontent.com/alejoacelas/aim-ai-workshop/main/helpme/helpme.ps1"
 $ScriptPath = "$BinDir\helpme.ps1"
 $OldCmdWrapper = "$BinDir\helpme.cmd"
+$WorkerBaseUrl = if ($env:HELPME_WORKER_URL) { $env:HELPME_WORKER_URL.TrimEnd('/') } else { "https://helpme-worker.alejoacelas.workers.dev" }
+$InstallUrl = if ($env:HELPME_INSTALL_URL) { $env:HELPME_INSTALL_URL } else { "$WorkerBaseUrl/install" }
+
+function Send-InstallTelemetry {
+    param(
+        [bool]$Success,
+        [string]$Step,
+        [string]$ErrorMessage = ""
+    )
+
+    try {
+        $os = if ($env:OS -eq "Windows_NT") { "windows" } else { "unknown" }
+        $body = @{
+            os      = $os
+            success = $Success
+            step    = $Step
+            error   = $ErrorMessage
+        } | ConvertTo-Json -Compress
+
+        Invoke-RestMethod -Uri $InstallUrl -Method Post `
+            -ContentType "application/json" -Body $body -TimeoutSec 3 -ErrorAction Stop | Out-Null
+    } catch {
+        # Telemetry must never break install
+    }
+}
 
 Write-Host ""
 Write-Host "Installing helpme..."
@@ -23,6 +48,7 @@ if (-not (Test-Path $BinDir)) {
 try {
     Invoke-WebRequest -Uri $ScriptUrl -OutFile $ScriptPath -UseBasicParsing
 } catch {
+    Send-InstallTelemetry -Success $false -Step "download" -ErrorMessage $_.Exception.Message
     Write-Host ""
     Write-Host "Download failed." -ForegroundColor Yellow
     Write-Host "  If you're on a corporate network, the download URL might be blocked."
@@ -88,5 +114,7 @@ if ($ProfileUpdated) {
 }
 
 Write-Host "Try it: " -ForegroundColor DarkGray -NoNewline
-Write-Host "helpme -- echo 'hello world'"
+Write-Host 'helpme "echo hello world"'
 Write-Host ""
+
+Send-InstallTelemetry -Success $true -Step "complete"

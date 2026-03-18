@@ -8,6 +8,8 @@ const SYSTEM_PROMPT_ERROR = `You're helping a non-technical person who is instal
 - Explain in one plain sentence what happened (no jargon, no technical terms)
 - Provide the exact shell commands to fix it, one per line
 - If relevant prior commands in the log history provide context, use them
+- If the "Command" looks like a natural-language request instead of a real shell command, treat it like a question and explain the steps plainly
+- For natural-language requests, put any real commands they should run in fix_commands
 
 Respond in JSON: { "ok": false, "explanation": "...", "fix_commands": ["cmd1", "cmd2"] }
 Only output valid JSON, nothing else.`;
@@ -35,6 +37,10 @@ export default {
 
     if (request.method === "POST" && url.pathname === "/analyze") {
       return handleAnalyze(request, env);
+    }
+
+    if (request.method === "POST" && url.pathname === "/install") {
+      return handleInstall(request, env);
     }
 
     if (request.method === "GET" && url.pathname === "/logs") {
@@ -141,13 +147,50 @@ stderr: ${stderr.slice(0, 2000)}${historyContext}`;
   return jsonResponse(result);
 }
 
+async function handleInstall(request: Request, env: Env): Promise<Response> {
+  const body = await request.json<{
+    os?: string;
+    success?: boolean;
+    step?: string;
+    error?: string;
+  }>();
+
+  const os = body.os || "";
+  const success = body.success ? 1 : 0;
+  const step = body.step || "";
+  const error = body.error || "";
+
+  try {
+    await env.DB.prepare(
+      `INSERT INTO installs (os, success, step, error)
+       VALUES (?, ?, ?, ?)`
+    )
+      .bind(os, success, step, error)
+      .run();
+  } catch {
+    // Telemetry must not fail the installer
+  }
+
+  return jsonResponse({ ok: true });
+}
+
 async function handleLogs(env: Env): Promise<Response> {
   let rows: Array<Record<string, unknown>> = [];
+  let installs: Array<Record<string, unknown>> = [];
   try {
     const result = await env.DB.prepare(
       "SELECT * FROM errors ORDER BY timestamp DESC LIMIT 200"
     ).all();
     rows = result.results || [];
+  } catch {
+    // DB might not be initialized yet
+  }
+
+  try {
+    const result = await env.DB.prepare(
+      "SELECT * FROM installs ORDER BY timestamp DESC LIMIT 200"
+    ).all();
+    installs = result.results || [];
   } catch {
     // DB might not be initialized yet
   }
@@ -185,6 +228,9 @@ async function handleLogs(env: Env): Promise<Response> {
   <div class="stat"><div class="stat-value" id="total">0</div><div class="stat-label">Total requests</div></div>
   <div class="stat"><div class="stat-value" id="errors">0</div><div class="stat-label">Errors</div></div>
   <div class="stat"><div class="stat-value" id="unique-cmds">0</div><div class="stat-label">Unique commands</div></div>
+  <div class="stat"><div class="stat-value" id="installs-total">0</div><div class="stat-label">Install attempts</div></div>
+  <div class="stat"><div class="stat-value" id="installs-success">0</div><div class="stat-label">Install successes</div></div>
+  <div class="stat"><div class="stat-value" id="installs-failed">0</div><div class="stat-label">Install failures</div></div>
 </div>
 <div class="filters">
   <input type="text" id="search" placeholder="Search commands or errors…">
@@ -205,9 +251,24 @@ async function handleLogs(env: Env): Promise<Response> {
   </thead>
   <tbody id="tbody"></tbody>
 </table>
+<h1 style="margin-top: 2rem;">Install Telemetry</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>OS</th>
+      <th>Success</th>
+      <th>Step</th>
+      <th>Error</th>
+    </tr>
+  </thead>
+  <tbody id="installs-tbody"></tbody>
+</table>
 <script>
 const data = ${JSON.stringify(rows)};
+const installs = ${JSON.stringify(installs)};
 const tbody = document.getElementById('tbody');
+const installsTbody = document.getElementById('installs-tbody');
 const searchInput = document.getElementById('search');
 const osFilter = document.getElementById('os-filter');
 
@@ -215,6 +276,9 @@ const osFilter = document.getElementById('os-filter');
 document.getElementById('total').textContent = data.length;
 document.getElementById('errors').textContent = data.filter(r => r.exit_code !== 0).length;
 document.getElementById('unique-cmds').textContent = new Set(data.map(r => r.command)).size;
+document.getElementById('installs-total').textContent = installs.length;
+document.getElementById('installs-success').textContent = installs.filter(r => Number(r.success) === 1).length;
+document.getElementById('installs-failed').textContent = installs.filter(r => Number(r.success) !== 1).length;
 
 // OS filter options
 const oses = [...new Set(data.map(r => r.os).filter(Boolean))];
@@ -237,6 +301,23 @@ function render(rows) {
       <td>\${r.stderr_snippet || ''}</td>
       <td>\${r.explanation || ''}</td>
       <td>\${fixes || ''}</td>
+    </tr>\`;
+  }).join('');
+}
+
+function renderInstalls(rows) {
+  if (rows.length === 0) {
+    installsTbody.innerHTML = '<tr><td colspan="5" class="empty">No install events yet</td></tr>';
+    return;
+  }
+  installsTbody.innerHTML = rows.map(r => {
+    const success = Number(r.success) === 1;
+    return \`<tr>
+      <td>\${r.timestamp || ''}</td>
+      <td>\${r.os || ''}</td>
+      <td class="\${success ? 'ok' : 'err'}">\${success ? 'yes' : 'no'}</td>
+      <td>\${r.step || ''}</td>
+      <td>\${r.error || ''}</td>
     </tr>\`;
   }).join('');
 }
@@ -268,6 +349,7 @@ document.querySelectorAll('th[data-col]').forEach(th => {
 });
 
 render(data);
+renderInstalls(installs);
 </script>
 </body>
 </html>`;

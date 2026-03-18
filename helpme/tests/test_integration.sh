@@ -37,6 +37,19 @@ assert_equals() {
   fi
 }
 
+assert_not_equals() {
+  local label="$1" actual="$2" expected="$3"
+  if [[ "$actual" != "$expected" ]]; then
+    echo "  PASS: $label"
+    PASS=$((PASS + 1))
+  else
+    echo "  FAIL: $label"
+    echo "    did not expect: $expected"
+    echo "    got: $actual"
+    FAIL=$((FAIL + 1))
+  fi
+}
+
 # --- Mock server helper ---
 
 start_mock() {
@@ -166,6 +179,24 @@ wait "$MOCK_PID" 2>/dev/null || true
 
 assert_contains "output contains explanation" "$OUTPUT" "Missing package"
 assert_contains "output contains fix command" "$OUTPUT" "npm install"
+
+# =========================================================
+# Test 6: Natural language request falls through to worker guidance
+# =========================================================
+echo ""
+echo "Test 6: Natural language request gets worker guidance"
+
+> "$TEST_DIR/log.jsonl"
+
+start_mock '{"ok":false,"explanation":"To install Homebrew, run the command below.","fix_commands":["/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""]}'
+
+run_helpme env HELPME_WORKER_URL="http://127.0.0.1:$MOCK_PORT" bash "$HELPME" -- "install brew"
+
+wait "$MOCK_PID" 2>/dev/null || true
+
+assert_not_equals "exit code is non-zero for natural language shell miss" "$EXIT" "0"
+assert_contains "output contains worker explanation" "$OUTPUT" "To install Homebrew"
+assert_contains "output contains suggested command" "$OUTPUT" "raw.githubusercontent.com/Homebrew/install"
 
 # =========================================================
 # Summary

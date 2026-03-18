@@ -28,7 +28,8 @@ function Run-InstallTest {
     param(
         [string]$FakeHome,
         [string]$FakeProfile,
-        [string]$ExtraSetup = ""
+        [string]$ExtraSetup = "",
+        [string]$RestMethodSetup = ""
     )
 
     # Escape single quotes for embedding in the command string
@@ -49,6 +50,8 @@ function global:Invoke-WebRequest {
     if (-not (Test-Path `$dir)) { New-Item -ItemType Directory -Path `$dir -Force | Out-Null }
     Copy-Item '$escapedHelpme' -Destination `$OutFile -Force
 }
+
+$RestMethodSetup
 
 $ExtraSetup
 
@@ -149,6 +152,48 @@ try {
     $installed = Get-Content $scriptPath -TotalCount 1
     $original = Get-Content $LocalHelpme -TotalCount 1
     Assert-True ($installed -eq $original) "Installed file matches source (first line)"
+} finally {
+    Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+# --------------------------------------------------
+# Test 6: install telemetry posts success event
+# --------------------------------------------------
+Write-Host "Test 6: install telemetry posts success event"
+$tmpDir = New-TempTestDir
+$fakeProfile = Join-Path $tmpDir "Documents" "PowerShell" "Microsoft.PowerShell_profile.ps1"
+$telemetryLog = Join-Path $tmpDir "telemetry.json"
+try {
+    $restMethodSetup = @"
+function global:Invoke-RestMethod {
+    param([string]`$Uri, [string]`$Method, [string]`$ContentType, [string]`$Body, [int]`$TimeoutSec, [string]`$ErrorAction)
+    Set-Content -Path '$($telemetryLog -replace "'", "''")' -Value (`$Body + "`nURI:`$Uri") -Encoding UTF8
+}
+"@
+    Run-InstallTest -FakeHome $tmpDir -FakeProfile $fakeProfile -RestMethodSetup $restMethodSetup | Out-Null
+    Assert-True (Test-Path $telemetryLog) "Telemetry request was sent"
+    $content = Get-Content $telemetryLog -Raw
+    Assert-True ($content -match '"success"\s*:\s*true') "Telemetry marks success true"
+    Assert-True ($content -match '/install') "Telemetry targets /install"
+} finally {
+    Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+# --------------------------------------------------
+# Test 7: telemetry failure does not break install
+# --------------------------------------------------
+Write-Host "Test 7: telemetry failure does not break install"
+$tmpDir = New-TempTestDir
+$fakeProfile = Join-Path $tmpDir "Documents" "PowerShell" "Microsoft.PowerShell_profile.ps1"
+try {
+    $restMethodSetup = @"
+function global:Invoke-RestMethod {
+    throw 'telemetry unavailable'
+}
+"@
+    Run-InstallTest -FakeHome $tmpDir -FakeProfile $fakeProfile -RestMethodSetup $restMethodSetup | Out-Null
+    $scriptPath = Join-Path $tmpDir ".local" "bin" "helpme.ps1"
+    Assert-True (Test-Path $scriptPath) "Install still succeeds when telemetry fails"
 } finally {
     Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
 }

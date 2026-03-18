@@ -123,6 +123,68 @@ MOCK
   echo "$fake_bin"
 }
 
+make_telemetry_curl_bin() {
+  local fake_bin
+  fake_bin=$(make_mock_curl_bin)
+  cat > "$fake_bin/curl" << MOCK
+#!/usr/bin/env bash
+set -euo pipefail
+if [[ "\$*" == *"raw.githubusercontent.com"* ]]; then
+  outfile=""
+  while [[ \$# -gt 0 ]]; do
+    case "\$1" in
+      -o) outfile="\$2"; shift 2 ;;
+      *) shift ;;
+    esac
+  done
+  if [[ -n "\$outfile" ]]; then
+    mkdir -p "\$(dirname "\$outfile")"
+    cp "$LOCAL_HELPME" "\$outfile"
+  fi
+  exit 0
+fi
+
+printf '%s\n' "\$*" >> "\${HELPME_TEST_CURL_LOG:?}"
+{
+  printf 'ARGS:%s\n' "\$*"
+  printf 'BODY:'
+  cat
+  printf '\n'
+} >> "\${HELPME_TEST_CURL_BODY_LOG:?}"
+exit 0
+MOCK
+  chmod +x "$fake_bin/curl"
+  echo "$fake_bin"
+}
+
+make_failing_telemetry_curl_bin() {
+  local fake_bin
+  fake_bin=$(make_mock_curl_bin)
+  cat > "$fake_bin/curl" << MOCK
+#!/usr/bin/env bash
+set -euo pipefail
+if [[ "\$*" == *"raw.githubusercontent.com"* ]]; then
+  outfile=""
+  while [[ \$# -gt 0 ]]; do
+    case "\$1" in
+      -o) outfile="\$2"; shift 2 ;;
+      *) shift ;;
+    esac
+  done
+  if [[ -n "\$outfile" ]]; then
+    mkdir -p "\$(dirname "\$outfile")"
+    cp "$LOCAL_HELPME" "\$outfile"
+  fi
+  exit 0
+fi
+
+printf '%s\n' "\$*" >> "\${HELPME_TEST_CURL_LOG:?}"
+exit 28
+MOCK
+  chmod +x "$fake_bin/curl"
+  echo "$fake_bin"
+}
+
 # Run install.sh in a subshell with controlled environment.
 # Usage: run_install <fake_home> <fake_bin> [extra env vars as KEY=VAL ...]
 # The script is run with bash, but BASH_VERSION and ZSH_VERSION are unset
@@ -315,6 +377,42 @@ set -e
 assert_exit "$exit_code" 1 "install exits 1 when curl is missing"
 assert_output_contains "$output" "curl" "error message mentions curl"
 assert_file_not_exists "$fake_home/.local/bin/helpme" "helpme not installed when curl is missing"
+echo ""
+
+# ---------------------------------------------------------------
+# Test 8: install telemetry — posts success event without affecting install
+# ---------------------------------------------------------------
+echo "Test 8: install telemetry posts success event"
+fake_home=$(make_fake_home)
+curl_log=$(mktemp)
+body_log=$(mktemp)
+CLEANUP_DIRS+=("$curl_log" "$body_log")
+fake_bin=$(make_telemetry_curl_bin)
+
+output=$(run_install "$fake_home" "$fake_bin" SHELL=/bin/zsh HELPME_TEST_CURL_LOG="$curl_log" HELPME_TEST_CURL_BODY_LOG="$body_log")
+exit_code=$?
+
+assert_exit "$exit_code" 0 "install exits 0 with telemetry enabled"
+assert_output_contains "$(cat "$curl_log")" "/install" "telemetry POST targets /install"
+assert_output_contains "$(cat "$body_log")" '"success":true' "telemetry marks success true"
+assert_output_contains "$(cat "$body_log")" '"os":"' "telemetry includes os"
+echo ""
+
+# ---------------------------------------------------------------
+# Test 9: telemetry failure — does not break install
+# ---------------------------------------------------------------
+echo "Test 9: telemetry failure does not break install"
+fake_home=$(make_fake_home)
+curl_log=$(mktemp)
+CLEANUP_DIRS+=("$curl_log")
+fake_bin=$(make_failing_telemetry_curl_bin)
+
+output=$(run_install "$fake_home" "$fake_bin" SHELL=/bin/zsh HELPME_TEST_CURL_LOG="$curl_log")
+exit_code=$?
+
+assert_exit "$exit_code" 0 "install still exits 0 when telemetry fails"
+assert_output_contains "$(cat "$curl_log")" "/install" "telemetry still attempted on failure"
+assert_file_exists "$fake_home/.local/bin/helpme" "helpme still installed when telemetry fails"
 echo ""
 
 # --- Summary ---
