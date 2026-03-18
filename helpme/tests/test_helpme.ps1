@@ -16,7 +16,7 @@ $TestDir = Join-Path ([System.IO.Path]::GetTempPath()) "helpme-test-$PID"
 # Isolated test environment
 New-Item -ItemType Directory -Path $TestDir -Force | Out-Null
 $env:HELPME_LOG_DIR = $TestDir
-$env:HELPME_WORKER_URL = "http://localhost:0"  # unreachable — tests don't need the worker
+$env:HELPME_WORKER_URL = "http://localhost:0"  # unreachable - tests don't need the worker
 
 # --- Assertions ---
 
@@ -29,10 +29,10 @@ function Assert-ExitCode($Desc, $Expected, [scriptblock]$ScriptBlock) {
         $got = 1
     }
     if ($got -eq $Expected) {
-        Write-Host "  ✓ $Desc"
+        Write-Host "  PASS: $Desc"
         $script:Pass++
     } else {
-        Write-Host "  ✗ $Desc (expected exit $Expected, got $got)"
+        Write-Host "  FAIL: $Desc (expected exit $Expected, got $got)"
         $script:Fail++
     }
 }
@@ -44,10 +44,10 @@ function Assert-OutputContains($Desc, $Pattern, [scriptblock]$ScriptBlock) {
         $output = $_.Exception.Message
     }
     if ($output -match [regex]::Escape($Pattern)) {
-        Write-Host "  ✓ $Desc"
+        Write-Host "  PASS: $Desc"
         $script:Pass++
     } else {
-        Write-Host "  ✗ $Desc (output did not contain '$Pattern')"
+        Write-Host "  FAIL: $Desc (output did not contain '$Pattern')"
         $lines = ($output -split "`n" | Select-Object -First 3) -join "`n"
         Write-Host "    got: $lines"
         $script:Fail++
@@ -87,11 +87,11 @@ Remove-Item $logPath -ErrorAction SilentlyContinue
 
 $logExists = Test-Path $logPath
 if (-not $logExists) {
-    Write-Host "  ✗ log file not created"
+    Write-Host "  FAIL: log file not created"
     $script:Fail++
 }
 if ($logExists) {
-    Write-Host "  ✓ log file created after run"
+    Write-Host "  PASS: log file created after run"
     $script:Pass++
 }
 
@@ -102,82 +102,82 @@ if ($logExists) {
 
 if ($logExists) {
     if ($lastLine -match '"timestamp"') {
-        Write-Host "  ✓ log entry contains 'timestamp'"
+        Write-Host "  PASS: log entry contains 'timestamp'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'timestamp'"
+        Write-Host "  FAIL: log entry missing 'timestamp'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"command"') {
-        Write-Host "  ✓ log entry contains 'command'"
+        Write-Host "  PASS: log entry contains 'command'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'command'"
+        Write-Host "  FAIL: log entry missing 'command'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"exit_code"') {
-        Write-Host "  ✓ log entry contains 'exit_code'"
+        Write-Host "  PASS: log entry contains 'exit_code'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'exit_code'"
+        Write-Host "  FAIL: log entry missing 'exit_code'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"os"') {
-        Write-Host "  ✓ log entry contains 'os'"
+        Write-Host "  PASS: log entry contains 'os'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'os'"
+        Write-Host "  FAIL: log entry missing 'os'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"shell"') {
-        Write-Host "  ✓ log entry contains 'shell'"
+        Write-Host "  PASS: log entry contains 'shell'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'shell'"
+        Write-Host "  FAIL: log entry missing 'shell'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"ok"') {
-        Write-Host "  ✓ log entry contains 'ok'"
+        Write-Host "  PASS: log entry contains 'ok'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'ok'"
+        Write-Host "  FAIL: log entry missing 'ok'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"explanation"') {
-        Write-Host "  ✓ log entry contains 'explanation'"
+        Write-Host "  PASS: log entry contains 'explanation'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'explanation'"
+        Write-Host "  FAIL: log entry missing 'explanation'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"fix_commands"') {
-        Write-Host "  ✓ log entry contains 'fix_commands'"
+        Write-Host "  PASS: log entry contains 'fix_commands'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'fix_commands'"
+        Write-Host "  FAIL: log entry missing 'fix_commands'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
 
     if ($lastLine -match '"duration"') {
-        Write-Host "  ✓ log entry contains 'duration'"
+        Write-Host "  PASS: log entry contains 'duration'"
         $script:Pass++
     } else {
-        Write-Host "  ✗ log entry missing 'duration'"
+        Write-Host "  FAIL: log entry missing 'duration'"
         Write-Host "    entry: $lastLine"
         $script:Fail++
     }
