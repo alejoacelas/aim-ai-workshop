@@ -85,102 +85,25 @@ $logPath = Join-Path $TestDir "log.jsonl"
 Remove-Item $logPath -ErrorAction SilentlyContinue
 & $PwshExe -Command "& '$Helpme' -- echo logtest" 2>&1 | Out-Null
 
-$logExists = Test-Path $logPath
-if (-not $logExists) {
-    Write-Host "  FAIL: log file not created"
-    $script:Fail++
-}
-if ($logExists) {
+if (Test-Path $logPath) {
     Write-Host "  PASS: log file created after run"
     $script:Pass++
-}
 
-$lastLine = ""
-if ($logExists) {
     $lastLine = Get-Content $logPath -Tail 1
-}
-
-if ($logExists) {
-    if ($lastLine -match '"timestamp"') {
-        Write-Host "  PASS: log entry contains 'timestamp'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'timestamp'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
+    $fields = @("timestamp", "command", "exit_code", "os", "shell", "ok", "explanation", "fix_commands", "duration")
+    foreach ($field in $fields) {
+        if ($lastLine -match "`"$field`"") {
+            Write-Host "  PASS: log entry contains '$field'"
+            $script:Pass++
+        } else {
+            Write-Host "  FAIL: log entry missing '$field'"
+            Write-Host "    entry: $lastLine"
+            $script:Fail++
+        }
     }
-
-    if ($lastLine -match '"command"') {
-        Write-Host "  PASS: log entry contains 'command'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'command'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"exit_code"') {
-        Write-Host "  PASS: log entry contains 'exit_code'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'exit_code'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"os"') {
-        Write-Host "  PASS: log entry contains 'os'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'os'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"shell"') {
-        Write-Host "  PASS: log entry contains 'shell'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'shell'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"ok"') {
-        Write-Host "  PASS: log entry contains 'ok'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'ok'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"explanation"') {
-        Write-Host "  PASS: log entry contains 'explanation'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'explanation'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"fix_commands"') {
-        Write-Host "  PASS: log entry contains 'fix_commands'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'fix_commands'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
-
-    if ($lastLine -match '"duration"') {
-        Write-Host "  PASS: log entry contains 'duration'"
-        $script:Pass++
-    } else {
-        Write-Host "  FAIL: log entry missing 'duration'"
-        Write-Host "    entry: $lastLine"
-        $script:Fail++
-    }
+} else {
+    Write-Host "  FAIL: log file not created"
+    $script:Fail++
 }
 
 Write-Host ""
