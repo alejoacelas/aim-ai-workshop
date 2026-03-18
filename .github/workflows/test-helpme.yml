@@ -1,4 +1,4 @@
-name: Test helpme
+name: Test helpme CLI
 
 on:
   push:
@@ -12,21 +12,63 @@ on:
 
 jobs:
   bash-tests:
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - run: bash helpme/tests/test_helpme.sh
 
+  bash-install-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash helpme/tests/test_install.sh
+
+  integration-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash helpme/tests/test_integration.sh
+
   powershell-tests:
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - run: pwsh helpme/tests/test_helpme.ps1
+
+  powershell-install-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - run: pwsh helpme/tests/test_install.ps1
+
+  powershell-51-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: powershell -File helpme/tests/test_helpme.ps1
+
+  bash-tests-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash helpme/tests/test_helpme.sh
