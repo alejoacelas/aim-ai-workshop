@@ -99,8 +99,7 @@ if ($logExists) {
     foreach ($field in $fields) {
         if ($lastLine -match "`"$field`"") { Write-Host "  ✓ log entry contains '$field'"; $script:Pass++ }
         else { Write-Host "  ✗ log entry missing '$field'"; Write-Host "    entry: $lastLine"; $script:Fail++ }
-    }
-}
+    } }
 
 Write-Host ""
 Write-Host "-- dispatcher routing --"
