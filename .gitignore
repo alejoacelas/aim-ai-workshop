@@ -1,1 +1,3 @@
 helpme/worker/.wrangler/
+.gstack/
+workshop-guide/dist/
