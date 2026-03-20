@@ -36,9 +36,7 @@ Codex-specific content...
 :::
 :::endtabs
 
-:::time
-15 min
-:::
+Inline: Agents burn through :def[tokens]{A unit of text (~4 characters) that AI models process. More tokens = more cost.} fast.
 ```
 
 YAML frontmatter per file:
@@ -101,8 +99,13 @@ Single long page with sticky sidebar navigation. All sections rendered on one sc
 - **Tab persistence**: choosing a tab carries across all tab groups with the same `id` (e.g., choosing "Mac" in one section selects "Mac" everywhere)
 - Nested tabs supported (e.g., agent choice → OS choice within)
 
-**`:::time`** — duration badge
-- Pulled from frontmatter `time` field
+**`:def[term]{explanation}`** — inline jargon tooltip
+- Dotted underline on the term, with a small `?` indicator
+- Hover reveals a tooltip with the explanation (max ~12 words)
+- On the webpage: `<span class="def" title="...">term<sup>?</sup></span>` with CSS dotted underline
+- In GDocs: rendered as "term*" with a footnote-style explanation, or just the term with the explanation in parentheses
+
+**Time estimates** — from frontmatter `time` field (no `:::time` directive needed)
 - Displayed in sidebar next to section title
 - Displayed as label above section heading in content area
 
@@ -182,6 +185,17 @@ The `content/*.md` source files stay where they are in the repo root.
 - `markdown-it` (npm) — markdown parsing
 - `gray-matter` (npm) — YAML frontmatter parsing
 - `google-api-python-client`, `google-auth` (Python, via uv) — Docs API formatting
+
+## Deploy skill
+
+A single local skill (`/deploy-workshop`) that handles the full publish pipeline: definition scan, webpage build, and GDocs sync. Lives at `skills/deploy-workshop/SKILL.md`.
+
+Steps the skill runs in order:
+
+1. **Definition scan** — read all `content/*.md` files, identify jargon terms a non-technical reader might not know (e.g., "tokens", "terminal", "markdown", "CLI", "API", "repo"), check which already have `:def[...]{}` annotations, suggest annotations with short (<12 word) explanations for any that don't, apply after user confirmation
+2. **Build webpage** — run `node workshop-guide/build.js` to produce `dist/index.html`
+3. **Sync GDocs** — run `node workshop-guide/sync-gdoc.js` to push content, then `uv run workshop-guide/format-gdoc.py` to apply colored formatting via Docs API
+4. **Report** — summarize what changed (new definitions added, sections updated, build status)
 
 ## Writing quality
 
