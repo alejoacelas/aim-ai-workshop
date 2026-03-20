@@ -1,0 +1,12 @@
+node_modules
+.git
+.env*
+*.md
+!content/*.md
+!README.md
+docs/
+exploration/
+workshop-guide/
+fly.toml
+Dockerfile
+.dockerignore

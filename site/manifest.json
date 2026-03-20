@@ -1,0 +1,11 @@
+{
+  "title": "Claude Code Workshop",
+  "sections": [
+    {"file": "00-start.md",              "id": "start",           "title": "Start here",                        "time": "5 min"},
+    {"file": "01-install.md",            "id": "install",         "title": "T0: Install your AI agent",         "time": "15 min"},
+    {"file": "02-clean-downloads.md",    "id": "clean-downloads", "title": "T1: Clean up your Downloads folder","time": "10 min"},
+    {"file": "03-skills.md",             "id": "skills",          "title": "T2: Try using skills",              "time": "15 min"},
+    {"file": "04-google-workspace.md",   "id": "google-workspace","title": "T3: Connect with Google Workspace", "time": "15 min"},
+    {"file": "05-build-something.md",    "id": "build-something",  "title": "T4: Build something useful",        "time": "30 min"}
+  ]
+}

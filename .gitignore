@@ -1,3 +1,14 @@
+# Dependencies
+node_modules/
+yarn.lock
+
+# Authoring tools (not for participants)
+authoring/
+package.json
+.sync-tmp.md
+
+# Build/dev artifacts
 helpme/worker/.wrangler/
 .gstack/
-workshop-guide/dist/
+.superpowers/
+.claude/
