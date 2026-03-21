@@ -6,9 +6,11 @@ yarn.lock
 authoring/
 package.json
 .sync-tmp.md
+_bmad/
 
 # Build/dev artifacts
 helpme/worker/.wrangler/
 .gstack/
 .superpowers/
 .claude/
+.agents/
