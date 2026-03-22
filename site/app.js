@@ -605,3 +605,76 @@ async function loadSite() {
 }
 
 loadSite();
+
+/* ─── Email subscribe popup ────────────────────────────────────────────────── */
+
+(function initSubscribePopup() {
+  if (localStorage.getItem('subscribed') || localStorage.getItem('subscribe-dismissed')) return;
+
+  // Show after 20 seconds
+  setTimeout(() => {
+    if (localStorage.getItem('subscribed') || localStorage.getItem('subscribe-dismissed')) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'subscribe-overlay';
+    overlay.innerHTML = `
+      <div class="subscribe-popup">
+        <button class="subscribe-close" aria-label="Close">&times;</button>
+        <p class="subscribe-heading">Stay in the loop</p>
+        <p class="subscribe-body">Get notified when we update this workshop with new tasks and tools.</p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="you@example.com" required class="subscribe-input">
+          <button type="submit" class="subscribe-btn">Subscribe</button>
+        </form>
+        <p class="subscribe-msg"></p>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Animate in
+    requestAnimationFrame(() => overlay.classList.add('visible'));
+
+    const close = () => {
+      localStorage.setItem('subscribe-dismissed', '1');
+      overlay.classList.remove('visible');
+      setTimeout(() => overlay.remove(), 300);
+    };
+
+    overlay.querySelector('.subscribe-close').addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+    overlay.querySelector('.subscribe-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const input = overlay.querySelector('.subscribe-input');
+      const msg = overlay.querySelector('.subscribe-msg');
+      const btn = overlay.querySelector('.subscribe-btn');
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      try {
+        const res = await fetch('https://helpme-worker.alejoacelas.workers.dev/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: input.value.trim() }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          localStorage.setItem('subscribed', '1');
+          msg.textContent = "You're in!";
+          msg.style.color = 'var(--term-green, #4ade80)';
+          setTimeout(close, 1500);
+        } else {
+          msg.textContent = data.error || 'Something went wrong';
+          msg.style.color = '#f87171';
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        }
+      } catch {
+        msg.textContent = 'Network error — try again';
+        msg.style.color = '#f87171';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    });
+  }, 20000);
+})();

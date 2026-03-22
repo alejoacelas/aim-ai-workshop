@@ -43,6 +43,10 @@ export default {
       return handleInstall(request, env);
     }
 
+    if (request.method === "POST" && url.pathname === "/subscribe") {
+      return handleSubscribe(request, env);
+    }
+
     if (request.method === "GET" && url.pathname === "/logs") {
       return handleLogs(env);
     }
@@ -169,6 +173,25 @@ async function handleInstall(request: Request, env: Env): Promise<Response> {
       .run();
   } catch {
     // Telemetry must not fail the installer
+  }
+
+  return jsonResponse({ ok: true });
+}
+
+async function handleSubscribe(request: Request, env: Env): Promise<Response> {
+  const body = await request.json<{ email: string }>();
+  const email = (body.email || "").trim().toLowerCase();
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return jsonResponse({ ok: false, error: "Invalid email" }, 400);
+  }
+
+  try {
+    await env.DB.prepare(
+      "INSERT OR IGNORE INTO subscribers (email) VALUES (?)"
+    ).bind(email).run();
+  } catch {
+    // ignore
   }
 
   return jsonResponse({ ok: true });

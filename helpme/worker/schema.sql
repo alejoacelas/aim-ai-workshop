@@ -20,3 +20,9 @@ CREATE TABLE IF NOT EXISTS installs (
   step TEXT,
   error TEXT
 );
+
+CREATE TABLE IF NOT EXISTS subscribers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL UNIQUE,
+  subscribed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
