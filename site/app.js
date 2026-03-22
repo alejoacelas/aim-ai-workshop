@@ -676,5 +676,5 @@ loadSite();
         btn.textContent = 'Subscribe';
       }
     });
-  }, 20000);
+  }, 3000);
 })();
