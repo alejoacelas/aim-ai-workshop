@@ -7,7 +7,7 @@ order: 2
 
 # Clean up your Downloads folder
 
-This task is for you to get used to an AI taking actions on your computer, and doing so without your direct supervision.
+Here you'll get a bit more used to having an AI take actions on your computer, and letting it act without your direct supervision.
 
 ---
 
@@ -19,7 +19,7 @@ Open your agent and paste in this prompt:
 Delete any unnecessary files in Downloads to save space
 :::
 
-Notice how it **asks your permission** before doing anything irreversible. This is the default behavior.
+Notice how it **asks your permission** before doing any permanent change to your computer. This is the default behavior.
 
 ---
 
@@ -32,11 +32,11 @@ Checking in every time is useful for genuinely risky tasks, but it gets in the w
 
 Close the current session (`/exit` or Ctrl + C twice). Open a new session and run:
 
-:::prompt
+:::terminal
 claude --dangerously-skip-permissions
 :::
 
-Once Claude is running, you can toggle unrestricted permissions off at any time with Shift + Tab (or Option/Meta + M).
+Once Claude is running, you can toggle unrestricted permissions off at any time with Shift + Tab (or Option/Meta + M), but you probably shouldn't.
 
 :::
 :::tab[Codex (ChatGPT)]
@@ -51,7 +51,7 @@ It's mostly safe, and it's what most power users do—including us.
 
 What was the last time you deleted all your files while creating a PowerPoint? AI labs invest heavily to make sure agents do what you ask.
 
-While there are alternatives, giving agents full permissions is an extremely convenient starting point. If you're curious about the risks, ask your group lead.
+While there are [alternatives](https://wow.pjh.is/journal/claude-code-permissions-whitelist), giving agents full permissions is an extremely convenient starting point. If you're curious about the risks, ask your group lead.
 :::
 
 ---
@@ -61,7 +61,7 @@ While there are alternatives, giving agents full permissions is an extremely con
 Now that your agent can act freely, give it a better-specified version of the same task:
 
 :::prompt
-Suggest files in my Downloads folder I could delete to save space. If a file's name isn't descriptive, open it and give me a one-line summary of what it is.
+Suggest files in my Downloads folder I could delete to save space. If a file's name isn't descriptive, read it and give me a one-line summary of what it is.
 :::
 
-Review the suggestions, then follow up with "Do it" or name specific files to delete. Watch your agent work through the list without interrupting you at every step.
+Review the suggestions, then follow up with "Do it" or name specific files to delete. No need to supervise your agent now that you found a better way to delegate it work.

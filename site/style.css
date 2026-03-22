@@ -9,19 +9,39 @@
 :root {
   --sidebar-width: 260px;
   --progress-h: 3px;
-  --orange-bg: #fff7ed;
-  --orange-border: #f97316;
-  --orange-text: #7c2d12;
-  --code-bg: #0f172a;
-  --code-text: #e2e8f0;
-  --accent: #2563eb;
-  --accent-light: #eff6ff;
-  --border: #e5e7eb;
-  --text: #111827;
-  --muted: #6b7280;
-  --radius: 6px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Monaco, Consolas, monospace;
+
+  /* Field notebook palette */
+  --cream: #faf6ee;
+  --cream-deep: #f0ebe3;
+  --ink: #3d3227;
+  --ink-light: #5c4a3a;
+  --ink-faint: #8b7355;
+  --sepia: #c4956a;
+  --sepia-light: #d4b08c;
+  --sepia-muted: #a07347;
+  --border: #e0d7c8;
+  --border-light: #ebe5d9;
+
+  /* Terminal palette (for :::terminal blocks) */
+  --term-bg: #0d1117;
+  --term-fg: #c9d1d9;
+  --term-green: #3fb950;
+  --term-border: #21262d;
+  --term-surface: #161b22;
+  --term-muted: #484f58;
+  --term-link: #58a6ff;
+
+  /* Accent */
+  --accent: #8b6f57;
+  --accent-light: #f5f0e8;
+
+  --text: var(--ink);
+  --muted: var(--ink-faint);
+  --radius: 5px;
+  --font: 'Literata', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'DM Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --mono-term: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
 }
 
 html {
@@ -34,7 +54,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: var(--text);
-  background: #fff;
+  background: #fdfcf9;
 }
 
 /* ─── Progress bar ──────────────────────────────────────────────────────────── */
@@ -45,7 +65,7 @@ body {
   left: 0;
   height: var(--progress-h);
   width: 0%;
-  background: var(--accent);
+  background: var(--sepia);
   z-index: 1000;
   transition: width 0.1s linear;
 }
@@ -59,7 +79,7 @@ body {
   width: var(--sidebar-width);
   height: 100vh;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--cream);
   border-right: 1px solid var(--border);
   padding: 24px 0 40px;
   z-index: 200;
@@ -75,16 +95,18 @@ body {
 }
 
 #site-title {
-  font-size: 13px;
+  font-family: var(--font-ui);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-faint);
 }
 
 #total-time {
+  font-family: var(--mono);
   font-size: 11px;
-  color: var(--muted);
+  color: var(--ink-faint);
   margin-top: 2px;
 }
 
@@ -98,8 +120,9 @@ body {
   align-items: baseline;
   gap: 8px;
   padding: 8px 20px;
-  color: var(--muted);
+  color: var(--ink-faint);
   text-decoration: none;
+  font-family: var(--font);
   font-size: 14px;
   line-height: 1.4;
   border-left: 3px solid transparent;
@@ -107,15 +130,15 @@ body {
 }
 
 #nav-list li a:hover {
-  color: var(--text);
-  background: #f0f0f0;
+  color: var(--ink);
+  background: var(--cream-deep);
 }
 
 #nav-list li a.active {
-  color: var(--accent);
-  border-left-color: var(--accent);
+  color: var(--sepia-muted);
+  border-left-color: var(--sepia);
   background: var(--accent-light);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nav-title {
@@ -123,18 +146,19 @@ body {
 }
 
 .nav-time {
-  font-size: 11px;
-  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-faint);
   white-space: nowrap;
-  background: #e5e7eb;
+  background: var(--border-light);
   padding: 1px 6px;
   border-radius: 20px;
   flex-shrink: 0;
 }
 
 #nav-list li a.active .nav-time {
-  background: #bfdbfe;
-  color: #1d4ed8;
+  background: var(--sepia-light);
+  color: var(--ink);
 }
 
 /* ─── Hamburger ─────────────────────────────────────────────────────────────── */
@@ -151,7 +175,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background: #fff;
+  background: var(--cream);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   cursor: pointer;
@@ -162,7 +186,7 @@ body {
   display: block;
   width: 18px;
   height: 2px;
-  background: var(--text);
+  background: var(--ink);
   border-radius: 2px;
   transition: transform 0.2s, opacity 0.2s;
 }
@@ -194,27 +218,30 @@ body {
 /* ─── Typography ────────────────────────────────────────────────────────────── */
 
 .section-block h1 {
+  font-family: var(--font);
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   margin-bottom: 24px;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .section-block h2 {
+  font-family: var(--font);
   font-size: 20px;
   font-weight: 600;
   margin-top: 40px;
   margin-bottom: 12px;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .section-block h3 {
+  font-family: var(--font);
   font-size: 17px;
   font-weight: 600;
   margin-top: 32px;
   margin-bottom: 10px;
-  color: var(--text);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -242,26 +269,30 @@ body {
 }
 
 .section-block a {
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--sepia-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--sepia-light);
+  text-underline-offset: 2px;
 }
 
 .section-block a:hover {
-  text-decoration: underline;
+  color: var(--ink);
+  text-decoration-color: var(--sepia);
 }
 
 .section-block code {
   font-family: var(--mono);
-  font-size: 0.875em;
-  background: #f1f5f9;
+  font-size: 0.85em;
+  background: var(--cream-deep);
   padding: 1px 5px;
   border-radius: 3px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
+  color: var(--ink-light);
 }
 
 .section-block pre {
-  background: var(--code-bg);
-  color: var(--code-text);
+  background: #2c2825;
+  color: #e8dfd3;
   padding: 16px;
   border-radius: var(--radius);
   overflow-x: auto;
@@ -280,10 +311,11 @@ body {
 }
 
 .section-block blockquote {
-  border-left: 3px solid var(--border);
+  border-left: 3px solid var(--sepia-light);
   padding-left: 16px;
-  color: var(--muted);
+  color: var(--ink-faint);
   margin: 16px 0;
+  font-style: italic;
 }
 
 .section-block hr {
@@ -310,10 +342,11 @@ body {
 .time-badge {
   display: inline-flex;
   align-items: center;
-  background: #f1f5f9;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
+  font-family: var(--mono);
+  background: var(--cream-deep);
+  color: var(--ink-faint);
+  font-size: 11px;
+  font-weight: 400;
   padding: 3px 10px;
   border-radius: 20px;
   white-space: nowrap;
@@ -321,22 +354,22 @@ body {
   border: 1px solid var(--border);
 }
 
-/* ─── Context blocks ────────────────────────────────────────────────────────── */
+/* ─── Context blocks (field notebook: warm sepia callout) ──────────────────── */
 
 .block-context {
-  background: var(--orange-bg);
-  border-left: 3px solid var(--orange-border);
+  background: var(--cream);
+  border-left: 3px solid var(--sepia);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 14px 18px;
   margin: 20px 0;
 }
 
 .block-context-title {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--orange-border);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--sepia-muted);
   margin-bottom: 8px;
 }
 
@@ -346,11 +379,11 @@ body {
   margin-bottom: 0;
 }
 
-/* ─── Prompt blocks ─────────────────────────────────────────────────────────── */
+/* ─── Prompt blocks (field notebook: warm dark with copy) ──────────────────── */
 
 .block-prompt {
   position: relative;
-  background: var(--code-bg);
+  background: #0f172a;
   border-radius: var(--radius);
   margin: 20px 0;
 }
@@ -361,6 +394,8 @@ body {
   padding: 16px 48px 16px 18px;
   white-space: pre-wrap;
   word-break: break-word;
+  color: #e2e8f0;
+  font-family: var(--mono);
 }
 
 .block-prompt .copy-btn {
@@ -373,7 +408,7 @@ body {
   border-radius: 4px;
   padding: 3px 8px;
   font-size: 11px;
-  font-family: var(--font);
+  font-family: var(--mono);
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   letter-spacing: 0.03em;
@@ -389,24 +424,90 @@ body {
   border-color: rgba(74,222,128,0.3);
 }
 
-/* ─── Aside blocks ──────────────────────────────────────────────────────────── */
+/* ─── Terminal blocks (terminal native: dark GitHub-style) ─────────────────── */
+
+.block-terminal {
+  position: relative;
+  background: var(--term-bg);
+  border: 1px solid var(--term-border);
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.block-terminal pre {
+  background: none;
+  margin: 0;
+  padding: 16px 48px 16px 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--term-fg);
+  font-family: var(--mono-term);
+  font-size: 13px;
+}
+
+.block-terminal pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.block-terminal pre code::before {
+  content: "$ ";
+  color: var(--term-green);
+  user-select: none;
+}
+
+.block-terminal .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--term-surface);
+  color: var(--term-link);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-family: var(--mono-term);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.03em;
+}
+
+.block-terminal .copy-btn:hover {
+  background: #1c2128;
+  color: #79c0ff;
+}
+
+.block-terminal .copy-btn.copied {
+  color: var(--term-green);
+  border-color: rgba(63,185,80,0.3);
+}
+
+/* ─── Aside blocks (editorial: bold border, high contrast) ─────────────────── */
 
 .block-aside {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 2px solid var(--ink);
+  border-radius: 0;
   margin: 20px 0;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .block-aside summary {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 11px 16px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  background: #f8fafc;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  background: #fff;
+  color: var(--ink);
   user-select: none;
   list-style: none;
 }
@@ -415,8 +516,8 @@ body {
 
 .block-aside summary::before {
   content: "▶";
-  font-size: 10px;
-  color: var(--muted);
+  font-size: 8px;
+  color: var(--ink);
   transition: transform 0.2s;
   flex-shrink: 0;
 }
@@ -427,8 +528,10 @@ body {
 
 .block-aside .aside-body {
   padding: 14px 16px;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--ink);
   font-size: 14px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .block-aside .aside-body p:last-child,
@@ -436,7 +539,7 @@ body {
   margin-bottom: 0;
 }
 
-/* ─── Tab blocks ────────────────────────────────────────────────────────────── */
+/* ─── Tab blocks (field notebook with sepia accents) ───────────────────────── */
 
 .block-tabs {
   margin: 20px 0;
@@ -447,7 +550,7 @@ body {
 
 .tab-bar {
   display: flex;
-  background: #f8fafc;
+  background: var(--cream);
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
 }
@@ -458,23 +561,24 @@ body {
   border: none;
   border-bottom: 2px solid transparent;
   cursor: pointer;
-  font-size: 13px;
-  font-family: var(--font);
-  font-weight: 500;
-  color: var(--muted);
+  font-size: 12px;
+  font-family: var(--mono);
+  font-weight: 400;
+  color: var(--ink-faint);
   white-space: nowrap;
   transition: color 0.15s, border-color 0.15s;
   margin-bottom: -1px;
 }
 
 .tab-btn:hover {
-  color: var(--text);
+  color: var(--ink);
 }
 
 .tab-btn.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  background: #fff;
+  color: var(--ink);
+  border-bottom-color: var(--sepia);
+  background: #fdfcf9;
+  font-weight: 500;
 }
 
 .tab-panel {
@@ -495,20 +599,87 @@ body {
 /* ─── Definition tooltips ──────────────────────────────────────────────────── */
 
 .def {
-  border-bottom: 1px dotted var(--muted);
+  position: relative;
+  border-bottom: 1px dotted var(--sepia-light);
   cursor: help;
 }
 
 .def sup {
   font-size: 10px;
-  color: var(--muted);
+  color: var(--ink-faint);
   margin-left: 1px;
+}
+
+.def-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c2825;
+  color: #e8dfd3;
+  border: 1px solid #4a3f35;
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  width: max-content;
+  max-width: 280px;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.def-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #4a3f35;
+}
+
+.def:hover .def-tooltip,
+.def:focus .def-tooltip {
+  display: block;
+}
+
+/* ─── GIF link hover preview ───────────────────────────────────────────────── */
+
+a.gif-preview {
+  position: relative;
+}
+
+a.gif-preview .gif-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  pointer-events: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+}
+
+a.gif-preview .gif-tooltip img {
+  display: block;
+  max-width: 320px;
+  border-radius: var(--radius);
+}
+
+a.gif-preview:hover .gif-tooltip,
+a.gif-preview:focus .gif-tooltip {
+  display: block;
 }
 
 /* ─── Time block (inline, handled by section header) ───────────────────────── */
 
 .block-time {
-  display: none; /* time is shown in the section header; suppress inline */
+  display: none;
 }
 
 /* ─── Responsive ────────────────────────────────────────────────────────────── */
@@ -545,6 +716,6 @@ body {
 
   .tab-btn {
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: 11px;
   }
 }

@@ -30,6 +30,7 @@ function stripFrontmatter(text) {
   Supported block types:
     :::context[Optional Title]  ... :::
     :::prompt                   ... :::
+    :::terminal                 ... :::
     :::aside[Title]             ... :::
     :::tabs{id="uid"}           :::tab[Label] ... ::: ... :::endtabs
     :::time                     ... :::
@@ -114,7 +115,7 @@ function preprocessBlocks(text) {
   const normalized = text.replace(/^[ \t]+(:::)/gm, '$1');
   // Replace inline :def[term]{explanation} with tooltip spans
   const withDefs = normalized.replace(/:def\[([^\]]+)\]\{([^}]+)\}/g,
-    (_, term, explanation) => `<span class="def" title="${escapeAttr(explanation)}">${escapeHtml(term)}<sup>?</sup></span>`);
+    (_, term, explanation) => `<span class="def" tabindex="0">${escapeHtml(term)}<sup>?</sup><span class="def-tooltip">${escapeHtml(explanation)}</span></span>`);
   return _preprocessBlocks(withDefs);
 }
 
@@ -179,7 +180,7 @@ function _preprocessBlocks(text) {
 }
 
 function parseGenericBlock(text) {
-  const openRe = /^:::(context|prompt|aside|time|tab)(?:\[([^\]]*)\])?(?:\{([^}]*)\})?\s*\n/;
+  const openRe = /^:::(context|prompt|terminal|aside|time|tab)(?:\[([^\]]*)\])?(?:\{([^}]*)\})?\s*\n/;
   const m = text.match(openRe);
   if (!m) return null;
 
@@ -238,6 +239,10 @@ function renderBlock(type, titleArg, body) {
     case 'prompt': {
       const escaped = escapeHtml(body); // raw body, no markdown processing
       return `<div class="block-prompt"><pre><code>${escaped}</code></pre><button class="copy-btn" data-text="${escapeAttr(body)}">Copy</button></div>`;
+    }
+    case 'terminal': {
+      const escaped = escapeHtml(body); // raw body, no markdown processing
+      return `<div class="block-terminal"><pre><code>${escaped}</code></pre><button class="copy-btn" data-text="${escapeAttr(body)}">Copy</button></div>`;
     }
     case 'aside': {
       const summary = titleArg ? escapeHtml(titleArg) : 'More details';
@@ -582,6 +587,15 @@ async function loadSite() {
     const groupId = tabs.dataset.group;
     const saved = localStorage.getItem(`tab:${groupId}`);
     if (saved) activateTab(groupId, saved);
+  });
+
+  // Add hover previews to GIF links
+  document.querySelectorAll('a[href$=".gif"], a[href$=".gifv"]').forEach(a => {
+    a.classList.add('gif-preview');
+    const tip = document.createElement('span');
+    tip.className = 'gif-tooltip';
+    tip.innerHTML = `<img src="${escapeAttr(a.href)}" alt="Preview">`;
+    a.appendChild(tip);
   });
 
   // Set up scroll spy
