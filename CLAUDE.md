@@ -47,6 +47,19 @@ Before building, there should be a clear plan (the `/plan-project` skill produce
 - Estimate which steps Claude Code does vs. which the human does
 - Warn about steps that might be slow or tricky for first-timers, with a note like: "This might take a few minutes if you haven't done it before. Ask for help and I can walk you through it."
 
+## Deploying
+
+When asked to deploy, run all three in parallel:
+
+1. **Workshop site** — `flyctl deploy --app useai-help` from the project root. Live at https://useai.help
+2. **Git push** — `git push origin main`
+3. **Helpme worker** — from `helpme/worker/`, run `npx wrangler deploy`, then re-set the secret:
+   ```
+   eval "$(grep OPENROUTER_API_KEY /Users/alejo/code/cliver/dev/.env)" && echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY --name helpme-worker
+   ```
+
+Always commit changes first if there are any. Use subagents to parallelize the three deploys.
+
 ## Communication style
 
 - No jargon: say "connect Claude to your Google account" not "configure the Google Workspace MCP server"
