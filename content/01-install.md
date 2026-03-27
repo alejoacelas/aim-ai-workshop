@@ -17,9 +17,9 @@ order: 1
 
 ## Choose your agent
 
-Codex (from OpenAI) has the best desktop app. Claude Code is a more likable agent, but runs in the :def[terminal]{an app that gives direct commands to your computer using text-only instructions}, which takes some time to get used to. Pick one and follow the instructions.
+Claude has both a desktop app and a :def[terminal]{an app that gives direct commands to your computer using text-only instructions}-based agent called Claude Code. The terminal version is what we'll use here—its main advantage is that you can open many tabs and run tasks in parallel, which is how power users get the most out of it. Codex (from OpenAI) is the main alternative.
 
-Agents burn through :def[tokens]{fancy AI term for a 'word'. Because AIs are multilungual and need to compress text, they don't quite correspond to words (e.g., they may chop and join words in a sentence differently), but it's close enough for most practical purposes} fast. If you already have an AI subscription, use it (or get one now—I think you won't regret it).
+Agents burn through :def[tokens]{fancy AI term for a 'word'. Because AIs are multilingual and need to compress text, they don't quite correspond to words (e.g., they may chop and join words in a sentence differently), but it's close enough for most practical purposes} fast. If you already have an AI subscription, use it (or get one now—I think you won't regret it).
 
 :::tabs{id="agent"}
 :::tab[Claude Code]
@@ -119,42 +119,10 @@ If typing `claude` gives an error right after installation, copy all the termina
 
 ---
 
-## Install a markdown editor
-
-:::context[No time for this on EAGx session, so skip for now]
-
+:::aside[Optional: install a markdown editor]
 Agents love :def[markdown]{a simple way to format text using symbols like # for headings and ** for bold}—it's how they format documents, create tables, and structure their work. Having a dedicated app to view these files makes everything easier.
 
-:::tabs{id="editor"}
-:::tab[Visual Studio Code (recommended)]
+**Visual Studio Code** (recommended): download from [code.visualstudio.com](https://code.visualstudio.com/), install, and you're set. It previews markdown beautifully.
 
-VS Code is a popular code editor that also previews markdown beautifully.
-
-:::tabs{id="os"}
-:::tab[Mac]
-
-1. Go to [code.visualstudio.com](https://code.visualstudio.com/)
-2. Click the big blue **Download for Mac** button
-3. Open the downloaded `.zip` file—it extracts to `Visual Studio Code.app`
-4. Drag `Visual Studio Code.app` into your Applications folder
-5. Open it from Applications (if you get a security prompt, click **Open**)
-
+**Obsidian**: popular for note-taking. Download from [obsidian.md](https://obsidian.md/).
 :::
-:::tab[Windows]
-
-1. Go to [code.visualstudio.com](https://code.visualstudio.com/)
-2. Click the big blue **Download for Windows** button
-3. Open the downloaded `.exe` installer
-4. Click Next through the setup wizard—defaults are fine
-5. Click Install, then Finish
-
-:::
-:::endtabs
-
-:::
-:::tab[Obsidian]
-
-[Obsidian](https://obsidian.md/) is popular for note-taking and handles markdown well. Download it from obsidian.md and follow the installer.
-
-:::
-:::endtabs
