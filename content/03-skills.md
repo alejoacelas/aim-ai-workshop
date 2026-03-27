@@ -8,29 +8,29 @@ order: 3
 # Try using skills
 
 :::context[Why skills are great!]
-LLMs have no memory between sessions. Everything they "remember" is because they wrote it down somewhere they can see it again ([think Memento!](https://64.media.tumblr.com/1db32ff3b4f301b244e7e918cfb47a86/tumblr_p7wqr6aEqH1rob81ao2_400.gifv)). Because there are limits on how much text an agent can process at once, you can't just dump every past interaction back at them every time.
+Imagine you have a guest staying at your house. They want to use the toaster, the coffee machine, and the washing machine—but every appliance works a little differently. You could explain each one from scratch every morning, or you could stick a post-it note on each one with instructions. Skills are those post-it notes.
 
-Skills are a simple and elegant solution. Each skill is a text file with a title, description, and instructions. The agent sees just the title and description at the start of every session, decides which ones are relevant, and reads the full content only when needed.
-
-Think of skills as reusable expertise—you write/download them once (or have your agent write them), and they stick around for when you need them.
+Each skill is a text file with a title, description, and instructions. Your agent sees the titles at the start of every session, picks the ones it needs, and reads the full instructions only when relevant. You write them once (or have your agent write them), and they stick around.
 :::
 
 ### Step 1: Download our skills repo
 
-Ask your agent to download the starter skills for this workshop:
+Ask your agent to download the starter skills for this workshop. Paste this prompt:
 
 :::prompt
 Download the skills at https://github.com/alejoacelas/aim-ai-workshop. If git is not available, use brew install git (Mac) or ask me to install it (Windows).
 :::
 
-The instructions about downloading :def[Git(Hub)]{social media site where programmers share code and projects} only need to be there the first time. Afterwards you can just paste the link. 
+Your agent will use :def[Git]{a tool programmers use to download and share code—think of GitHub as a library of projects, and Git as the tool that fetches them} to download the files. The first time, it may need to install Git—just follow any prompts. After that, whenever you want your agent to grab code from the internet, you can just paste the link and it'll know what to do.
 
-:::tabs{id="agent"}
+Once the download finishes, reload your agent so it picks up the new skills:
+
+:::tabs{id="agent-skills"}
 :::tab[Claude Code]
-Open a new terminal tab (Cmd + T on Mac, Ctrl + Shift + T on Windows) and start a new `claude` session to reload skills.
+Open a new terminal tab (Cmd + T on Mac, Ctrl + Shift + T on Windows) and start a new `claude` session.
 :::
 :::tab[Codex (ChatGPT)]
-Press Cmd + N to start a new session and reload skills.
+Press Cmd + N to start a new session.
 :::
 :::endtabs
 
@@ -44,7 +44,7 @@ Type `/` followed by a skill name and hit Enter. Try each of these in a separate
 /setup-coding-env
 :::
 
-Leave it running in the backgroud. It will install everything you need to run web apps and data analysis from your computer. Once it's finihsed, you can just type `claude-yolo` in new tabs instead of the full `claude --dangerously-skip-permissions`.
+Leave it running in the background. It will install everything you need to run web apps and data analysis from your computer.
 
 Now try:
 
