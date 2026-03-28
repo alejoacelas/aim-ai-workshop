@@ -9,7 +9,7 @@ order: 0
 
 By the end of this session you'll have a coding agent running on your computer, connected to your Google Workspace, and you'll have built something cool with it.
 
-Most people who try this are surprised by how much they can do without knowing how to code. The goal isn't to learn programming. It's to get a capable agent working for you today.
+Most people who try this are surprised by how much they can get done without knowing how to code. The goal isn't to learn programming — it's to get a capable agent working for you today.
 
 ## Session overview
 
