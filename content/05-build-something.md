@@ -38,5 +38,5 @@ You've seen what agents can do. Now we'd love to know: **what's the one thing yo
 Maybe it's whether agents can handle a specific workflow, how to keep your data safe, or how to get your team on board. Whatever it is, tell us and we'll address the most common ones in future updates.
 
 :::prompt
-Ask your agent: "Send an email to alejo@useai.help with my biggest unanswered question about AI agents"
+Ask your agent: "Send an email to alejoacelas@gmail.com with my biggest unanswered question about AI agents"
 :::
