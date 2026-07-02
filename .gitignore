@@ -14,3 +14,4 @@ helpme/worker/.wrangler/
 .superpowers/
 .claude/
 .agents/
+.vercel

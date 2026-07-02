@@ -1,0 +1,4 @@
+{
+  "buildCommand": "mkdir -p dist && cp -R site/. dist/ && cp -R content dist/content",
+  "outputDirectory": "dist"
+}
