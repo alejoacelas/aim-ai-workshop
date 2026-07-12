@@ -1,18 +1,11 @@
-# See https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/
+name: Retired Fly deployment
 
-name: Fly Deploy
-on:
-  push:
-    branches:
-      - main
+# The site moved to Vercel and the Fly app was destroyed. Keep this manual-only
+# placeholder so the retired deployment cannot run on pushes.
+on: workflow_dispatch
+
 jobs:
-  deploy:
-    name: Deploy app
+  retired:
     runs-on: ubuntu-latest
-    concurrency: deploy-group    # optional: ensure only one action runs at a time
     steps:
-      - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - run: echo "The site is deployed by Vercel."
